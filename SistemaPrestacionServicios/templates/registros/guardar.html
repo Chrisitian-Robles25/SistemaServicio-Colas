@@ -1,0 +1,25 @@
+{% extends "template.html" %}
+{% block content %}
+<h2 class="text-white">Agregar registro</h2>
+<div class="booking-form-body">
+    <a href="/registros" class="btn btn-danger">VOLVER</a>
+    <form id="form" class="custom-form booking-form" action="/registros/guardar" method="post" role="form">
+        <div class="booking-form-body">
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    <input type="text" name="servidor" class="form-control" placeholder="nombre del servidor publico" required>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <input type="text" name="fecha" class="form-control" placeholder="fecha dd/mm/aaaa" required>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <input type="text" name="clienteDni" class="form-control" placeholder="DNI del cliente atentido" required>
+                </div>
+                <div class="col-lg-4 col-md-10 col-8 mx-auto mt-2">
+                    <button id="boton" type="submit" class="form-control btn btn-success">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

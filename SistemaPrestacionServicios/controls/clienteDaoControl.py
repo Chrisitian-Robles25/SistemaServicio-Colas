@@ -1,3 +1,4 @@
+from controls.dao.quequeAdaoAdapter import QuequeDaoAdapter
 from controls.dao.daoAdapter import DaoAdapter
 from models.cliente import Cliente
 from controls.tda.queque.queque import Queque

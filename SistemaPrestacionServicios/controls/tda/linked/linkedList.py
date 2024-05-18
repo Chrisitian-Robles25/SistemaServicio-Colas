@@ -128,6 +128,6 @@ class LinkedList(object):
        data = ''
 
        while node != None:
-            data += str(node._data)+ '    '
+            data += str(node._data._id)+ '    '
             node = node._next
             print(data)
