@@ -9,7 +9,7 @@ from controls.tda.queque.queque import Queque
 #persona = Persona()
 #personaDC = PersonaDaoControl()
 #CREAR UN OBJETO PARA DARLE QUEQUE Con un tamaño de 5
-queque = Queque(3)
+#queque = Queque(3)
 clienteDC = ClienteDaoControl()
 registroDC = RegistroDaoControl()
 try:
@@ -22,7 +22,7 @@ try:
     clienteDC._cliente._TiempoAtencion = "10 minutos"
     clienteDC._cliente._CalificarServicio = "Bueno"
     clienteDC.save
-    queque.queque(clienteDC)
+    #queque.queque(clienteDC)
     
     clienteDC._cliente._nombre = "Esteban"
     clienteDC._cliente._apellido = "Quito"
@@ -32,7 +32,7 @@ try:
     clienteDC._cliente._TiempoAtencion = "12 minutos"
     clienteDC._cliente._CalificarServicio = "Malo"
     clienteDC.save
-    queque.queque(clienteDC)
+    #queque.queque(clienteDC)
 
     clienteDC._cliente._nombre = "Juan"
     clienteDC._cliente._apellido = "Perez"
@@ -42,12 +42,12 @@ try:
     clienteDC._cliente._TiempoAtencion = "10 minutos"
     clienteDC._cliente._CalificarServicio = "Bueno"
     clienteDC.save
-    queque.queque(clienteDC)
+    #queque.queque(clienteDC)
 
     registroDC._registro._servidor = "SERVIDOR 1 - JUANCHO"
     registroDC._registro._fecha = "10/24/2021"
     registroDC._registro._clienteDni = "123456789"
-    registroDC.save
+    #registroDC.save
 
 
     #queque.queque(clienteDC)

@@ -22,7 +22,6 @@ class QuequeOperation(LinkedList):
             self.add(data, self._lenght)
         else:
             raise LinkedEmpty("Stack is full")
-    
 
     @property
     def dequeque(self):
@@ -30,6 +29,9 @@ class QuequeOperation(LinkedList):
             raise LinkedEmpty("Stack empty")
         else:
             return self.delete(0)
+        
+    def clear(self):
+        return self.clear
         
     def str (self):
         return self._list()

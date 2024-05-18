@@ -1,0 +1,33 @@
+{% extends "template.html" %}
+{% block content %}
+<h2 class="text-white">Servidores Publicos</h2>
+<div class="booking-form-body">
+    <a href="/registros/ver" class="btn btn-danger">AGREGAR</a>
+    <table id="tabla" class="table text-white">
+        <thead>
+            <tr>
+                <th>Nro</th>
+                <th>Servidor Publico</th>
+                <th>Fecha de atencion</th>
+                <th>DNI de clientes</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in lista %}
+                <tr>
+                    <td>1</td>
+                    <td>{{ item.servidor }}</td>
+                    <td>{{ item.fecha }}</td>
+                    <td>{{ item.clienteDni }}</td>
+                    <td>
+                        <a href="/registros/editar/{{ item.id }}" class="btn btn-warning">Editar</a>
+                        <a href="/registros/eliminar/{{ item.id }}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor%}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
