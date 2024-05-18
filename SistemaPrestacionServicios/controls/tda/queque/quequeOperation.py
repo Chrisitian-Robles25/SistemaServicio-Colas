@@ -1,4 +1,5 @@
 from controls.tda.linked.linkedList import LinkedList #importanmos linkedList porque ya tenemos los metodos de la lista enlazada
+from controls.exception.linkedEmpty import LinkedEmpty
 
 class QuequeOperation(LinkedList):
     def __init__(self, top):
@@ -22,9 +23,13 @@ class QuequeOperation(LinkedList):
         else:
             raise LinkedEmpty("Stack is full")
     
+
     @property
     def dequeque(self):
         if self.isEmpty:
             raise LinkedEmpty("Stack empty")
         else:
             return self.delete(0)
+        
+    def str (self):
+        return self._list()

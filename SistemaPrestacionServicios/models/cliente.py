@@ -5,9 +5,16 @@ from models.enumCalificacion import EnumCalificacion
 class Cliente(Persona):
     def __init__(self):
         super().__init__()
+        self.__TiempoAtencion = ''
         self.__CalificarServicio = EnumCalificacion.BUENO
     
-        
+    @property
+    def _TiempoAtencion(self):
+        return self.__TiempoAtencion
+
+    @_TiempoAtencion.setter
+    def _TiempoAtencion(self, value):
+        self.__TiempoAtencion = value
 
     @property
     def _CalificarServicio(self):
@@ -26,6 +33,7 @@ class Cliente(Persona):
             'dni': self._dni,
             'direccion': self._direccion,
             'telefono': self._telefono,
+            'tiempo de atencion': self._TiempoAtencion,
             'calificarServicio': self._CalificarServicio
         }
     
@@ -37,6 +45,7 @@ class Cliente(Persona):
         cliente._dni = data['dni']
         cliente._direccion = data['direccion']
         cliente._telefono = data['telefono']
+        cliente._TiempoAtencion = data['tiempo de atencion']
         cliente._CalificarServicio = data['calificarServicio']
         return cliente
     

@@ -26,7 +26,6 @@ class DaoAdapter(Generic[T]):
         return self.lista
 
     def _transform_(self):
-        
         aux = "["
         for i in range(0, self.lista._lenght):
             if i < self.lista._lenght - 1:

@@ -18,3 +18,6 @@ class Queque:
     @property
     def verify(self):
         return self.__queque.verifyTop
+        
+    def deserealizar(self, data):
+        self.__queque.deserealizar(data)

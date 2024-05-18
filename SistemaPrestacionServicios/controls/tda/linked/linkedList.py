@@ -121,6 +121,7 @@ class LinkedList(object):
             node_last = node_preview._next
             node_preview._next = node_last._next
             self.__lenght -= 1 
+    
     @property
     def print(self):
        node = self.__head
