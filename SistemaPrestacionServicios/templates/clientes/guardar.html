@@ -1,7 +1,9 @@
 {% extends "template.html" %}
 {% block content %}
-<h2 class="text-white">Agregar clientes</h2>
+
 <div class="booking-form-body">
+    <br>
+    <h3 class="text-white">Agregar clientes</h3>
     <a href="/clientes" class="btn btn-danger">VOLVER</a>
     <form id="form" class="custom-form booking-form" action="/clientes/guardar" method="post" role="form">
         <div class="booking-form-body">
@@ -10,22 +12,31 @@
                     <input type="text" name="dni" class="form-control" placeholder="DNI" required>
                 </div>
                 <div class="col-lg-6 col-12">
-                    <input type="text" name="apellido" class="form-control" placeholder="Apellidos" required>
+                    <input type="lname" name="apellido" class="form-control" placeholder="Apellidos" required>
                 </div>
                 <div class="col-lg-6 col-12">
-                    <input type="text" name="nombre" class="form-control" placeholder="Nombres" required>
+                    <input type="fname" name="nombre" class="form-control" placeholder="Nombres" required>
                 </div>
                 <div class="col-lg-6 col-12">
                     <input type="text" name="direccion" class="form-control" placeholder="Direccion" required>
                 </div>
                 <div class="col-lg-6 col-12">
-                    <input type="text" name="telefono" class="form-control" placeholder="Telefono" required>
+                    <input type="tel" name="telefono" class="form-control" placeholder="Telefono" required>
                 </div>
                 <div class="col-lg-6 col-12">
-                    <input type="text" name="tiempoAtencion" class="form-control" placeholder="tiempo de Atencion" required>
+                    <b class="text-white">Tiempo de atencion en HH:MM</b>
+                    <input type="time" name="tiempoAtencion" class="form-control" placeholder="tiempo de Atencion" required>
                 </div>
+                
                 <div class="col-lg-6 col-12">
-                    <input type="text" name="calificarServicio" class="form-control" placeholder="calificar el Servicio" required>
+                    <b class="text-white">Calificar la atencion</b><br>
+                    <form>
+                        <input type="radio" name="calificarServicio" value="Malo"> <label class="text-white" >Malo</label><br>
+                        <input type="radio" name="calificarServicio" value="Regular"> <label class="text-white" >Regular</label><br>
+                        <input type="radio" name="calificarServicio" value="Bueno"> <label class="text-white" >Bueno</label><br>
+                        <input type="radio" name="calificarServicio" value="Muy Bueno"> <label class="text-white" >Muy Bueno</label><br>
+                        <input type="radio" name="calificarServicio" value="Excelente"> <label  class="text-white" >Excelente</label><br>
+                    </form>
                 </div>
                 <div class="col-lg-4 col-md-10 col-8 mx-auto mt-2">
                     <button id="boton" type="submit" class="form-control btn btn-success">Guardar</button>

@@ -16,38 +16,38 @@ try:
 
     clienteDC._cliente._nombre = "Christian"
     clienteDC._cliente._apellido = "Robles"
-    clienteDC._cliente._dni = "123456789"
-    clienteDC._cliente._direccion = "Calle 123"
-    clienteDC._cliente._telefono = "123456789"
-    clienteDC._cliente._TiempoAtencion = "10 minutos"
-    clienteDC._cliente._CalificarServicio = "Bueno"
+    clienteDC._cliente._dni = "1105549602"
+    clienteDC._cliente._direccion = "Alamor"
+    clienteDC._cliente._telefono = "0991745767"
+    clienteDC._cliente._TiempoAtencion = "00:25"
+    clienteDC._cliente._CalificarServicio = "Excelente"
     clienteDC.save
     #queque.queque(clienteDC)
     
     clienteDC._cliente._nombre = "Esteban"
-    clienteDC._cliente._apellido = "Quito"
-    clienteDC._cliente._dni = "123456789"
-    clienteDC._cliente._direccion = "Av. el limon"
-    clienteDC._cliente._telefono = "123456789"
-    clienteDC._cliente._TiempoAtencion = "12 minutos"
+    clienteDC._cliente._apellido = "Leon"
+    clienteDC._cliente._dni = "0778465219"
+    clienteDC._cliente._direccion = "Pinas"
+    clienteDC._cliente._telefono = "0978461578"
+    clienteDC._cliente._TiempoAtencion = "01:12"
     clienteDC._cliente._CalificarServicio = "Malo"
     clienteDC.save
     #queque.queque(clienteDC)
 
-    clienteDC._cliente._nombre = "Juan"
-    clienteDC._cliente._apellido = "Perez"
-    clienteDC._cliente._dni = "123456789"
-    clienteDC._cliente._direccion = "Calle 123"
-    clienteDC._cliente._telefono = "123456789"
-    clienteDC._cliente._TiempoAtencion = "10 minutos"
-    clienteDC._cliente._CalificarServicio = "Bueno"
+    clienteDC._cliente._nombre = "Santiago"
+    clienteDC._cliente._apellido = "Tamayo"
+    clienteDC._cliente._dni = "1978495614"
+    clienteDC._cliente._direccion = "Colombia"
+    clienteDC._cliente._telefono = "0978461385"
+    clienteDC._cliente._TiempoAtencion = "00:45"
+    clienteDC._cliente._CalificarServicio = "Regular"
     clienteDC.save
     #queque.queque(clienteDC)
 
-    registroDC._registro._servidor = "SERVIDOR 1 - JUANCHO"
-    registroDC._registro._fecha = "10/24/2021"
-    registroDC._registro._clienteDni = "123456789"
-    #registroDC.save
+    registroDC._registro._servidor = "V1-Wilman Sanchez"
+    registroDC._registro._fecha = "18/05/2024"
+    registroDC._registro._clienteDni = "1105549602"
+    registroDC.save
 
 
     #queque.queque(clienteDC)

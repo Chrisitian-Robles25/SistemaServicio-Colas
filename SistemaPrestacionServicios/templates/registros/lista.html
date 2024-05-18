@@ -1,9 +1,14 @@
 {% extends "template.html" %}
 {% block content %}
-<h2 class="text-white">Servidores Publicos</h2>
+
 <div class="booking-form-body">
+    <br>
+    <h3 class="text-white">Servidores Publicos</h3>
     <a href="/registros/ver" class="btn btn-danger">AGREGAR</a>
-    <table id="tabla" class="table text-white">
+    
+    <br>
+    <br>
+    <table id="example" class="display">
         <thead>
             <tr>
                 <th>Nro</th>
@@ -16,13 +21,12 @@
         <tbody>
             {% for item in lista %}
                 <tr>
-                    <td>1</td>
+                    <td>{{ item.id }}</td>
                     <td>{{ item.servidor }}</td>
                     <td>{{ item.fecha }}</td>
                     <td>{{ item.clienteDni }}</td>
                     <td>
                         <a href="/registros/editar/{{ item.id }}" class="btn btn-warning">Editar</a>
-                        <a href="/registros/eliminar/{{ item.id }}" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
             {% endfor%}

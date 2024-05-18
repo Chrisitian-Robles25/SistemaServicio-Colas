@@ -1,9 +1,14 @@
 {% extends "template.html" %}
 {% block content %}
-<h2 class="text-white">Lista de clientes</h2>
+
 <div class="booking-form-body">
-    <a href="/clientes/ver" class="btn btn-danger">AGREGAR</a>
-    <table id="tabla" class="table text-white">
+    <br>
+    <h3 class="text-white">Lista de clientes</h3>
+    <a href="/clientes/ver" class="btn btn-danger" >AGREGAR</a>
+    
+    <table id="example" class="display" >
+        <br>
+        <br>
         <thead>
             <tr>
                 <th>Nro</th>
@@ -11,7 +16,7 @@
                 <th>DNI</th>
                 <th>Direccion</th>
                 <th>Telefono</th>
-                <th>Tiempo de atencion</th>
+                <th>Tiempo de atencion HH:MM</th>
                 <th>Calificacion de servicio</th>
                 <th>Acciones</th>
             </tr>
@@ -19,7 +24,7 @@
         <tbody>
             {% for item in lista %}
                 <tr>
-                    <td>1</td>
+                    <td>{{ item.id }}</td>
                     <td>{{ item.apellido }} {{ item.nombre }}</td>
                     <td>{{ item.dni }}</td>
                     <td>{{ item.direccion }}</td>
@@ -28,7 +33,6 @@
                     <td>{{ item.calificarServicio }}</td>
                     <td>
                         <a href="/clientes/editar/{{ item.id }}" class="btn btn-warning">Editar</a>
-                        <a href="/clientes/eliminar/{{ item.id }}" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
             {% endfor%}
