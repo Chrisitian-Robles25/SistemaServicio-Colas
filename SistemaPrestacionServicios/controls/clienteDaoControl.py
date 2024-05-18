@@ -1,5 +1,7 @@
+from controls.dao.quequeAdaoAdapter import QuequeDaoAdapter
 from controls.dao.daoAdapter import DaoAdapter
 from models.cliente import Cliente
+from controls.tda.queque.queque import Queque
 
 class ClienteDaoControl (DaoAdapter):
     def __init__(self):
@@ -9,7 +11,7 @@ class ClienteDaoControl (DaoAdapter):
     @property
     def _cliente(self):
         if self.__cliente == None:
-            self.__cliente = Cliente()   
+            self.__cliente = Cliente()
         return self.__cliente
     
     @_cliente.setter
@@ -32,5 +34,4 @@ class ClienteDaoControl (DaoAdapter):
         self._delete(self._cliente, pos)
     
     #crear el str
-    
 

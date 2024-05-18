@@ -4,6 +4,15 @@ class Queque:
     def __init__(self, top):
         self.__queque = QuequeOperation(top)
 
+    @property
+    def _queque(self):
+        return self.__queque
+
+    @_queque.setter
+    def _queque(self, value):
+        self.__queque = value
+
+
     def queque(self, data):
         self.__queque.queque(data)
     
@@ -18,3 +27,10 @@ class Queque:
     @property
     def verify(self):
         return self.__queque.verifyTop
+        
+    def deserealizar(self, data):
+        self.__queque.deserealizar(data)
+
+    @property
+    def clear(self):
+        self.__queque.clear

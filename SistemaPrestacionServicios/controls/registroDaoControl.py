@@ -1,5 +1,6 @@
 from controls.dao.daoAdapter import DaoAdapter
 from models.registro import Registro
+from controls.tda.queque.queque import Queque
 
 class RegistroDaoControl(DaoAdapter):
     def __init__(self):
@@ -9,7 +10,7 @@ class RegistroDaoControl(DaoAdapter):
     @property
     def _registro(self):
         if self.__registro == None:
-            self.__registro = Registro()   
+            self.__registro = Registro()
         return self.__registro
     
     @_registro.setter

@@ -1,43 +1,56 @@
 import sys
 sys.path.append('../')
-from controls.tda.linked.linkedList import LinkedList
+
 from controls.personaDaoControl import PersonaDaoControl
 from controls.clienteDaoControl import ClienteDaoControl
 from controls.registroDaoControl import RegistroDaoControl
 from controls.tda.queque.queque import Queque
 
 #persona = Persona()
-personaDC = PersonaDaoControl()
+#personaDC = PersonaDaoControl()
+#CREAR UN OBJETO PARA DARLE QUEQUE Con un tamaño de 5
+#queque = Queque(3)
 clienteDC = ClienteDaoControl()
 registroDC = RegistroDaoControl()
 try:
-    personaDC._persona._nombre = "jose"
-    personaDC._persona._apellido = "guaman"
-    personaDC._persona._dni = "1105549601"
-    personaDC._persona._direccion = "loja 123"
-    personaDC._persona._telefono = "0987654321"
-    personaDC.save
-    personaDC._persona._nombre = "franco"
-    personaDC._persona._apellido = "salcedo"
-    personaDC._persona._dni = "1105549602"
-    personaDC._persona._direccion = "quito 123"
-    personaDC._persona._telefono = "0987654322"
-    personaDC.save
-    
+
     clienteDC._cliente._nombre = "Christian"
     clienteDC._cliente._apellido = "Robles"
     clienteDC._cliente._dni = "1105549602"
-    clienteDC._cliente._direccion = "alamor 123"
-    clienteDC._cliente._telefono = "0987654321"
-    clienteDC._cliente._CalificarServicio = "BUENO"
+    clienteDC._cliente._direccion = "Alamor"
+    clienteDC._cliente._telefono = "0991745767"
+    clienteDC._cliente._TiempoAtencion = "00:25"
+    clienteDC._cliente._CalificarServicio = "Excelente"
     clienteDC.save
-    clienteDC._cliente._nombre = "esteban"
-    clienteDC._cliente._apellido = "leon"
-    clienteDC._cliente._dni = "1105549603"
-    clienteDC._cliente._direccion = "pinas 321"
-    clienteDC._cliente._telefono = "0987654322"
-    clienteDC._cliente._CalificarServicio = "MALO"
+    #queque.queque(clienteDC)
+    
+    clienteDC._cliente._nombre = "Esteban"
+    clienteDC._cliente._apellido = "Leon"
+    clienteDC._cliente._dni = "0778465219"
+    clienteDC._cliente._direccion = "Pinas"
+    clienteDC._cliente._telefono = "0978461578"
+    clienteDC._cliente._TiempoAtencion = "01:12"
+    clienteDC._cliente._CalificarServicio = "Malo"
     clienteDC.save
+    #queque.queque(clienteDC)
 
+    clienteDC._cliente._nombre = "Santiago"
+    clienteDC._cliente._apellido = "Tamayo"
+    clienteDC._cliente._dni = "1978495614"
+    clienteDC._cliente._direccion = "Colombia"
+    clienteDC._cliente._telefono = "0978461385"
+    clienteDC._cliente._TiempoAtencion = "00:45"
+    clienteDC._cliente._CalificarServicio = "Regular"
+    clienteDC.save
+    #queque.queque(clienteDC)
+
+    registroDC._registro._servidor = "V1-Wilman Sanchez"
+    registroDC._registro._fecha = "18/05/2024"
+    registroDC._registro._clienteDni = "1105549602"
+    registroDC.save
+
+
+    #queque.queque(clienteDC)
+    #print (queque)
 except Exception as error:
     print(error.args)
