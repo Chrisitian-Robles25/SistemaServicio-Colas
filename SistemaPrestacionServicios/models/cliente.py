@@ -33,7 +33,7 @@ class Cliente(Persona):
             'dni': self._dni,
             'direccion': self._direccion,
             'telefono': self._telefono,
-            'tiempo de atencion': self._TiempoAtencion,
+            'tiempoAtencion': self._TiempoAtencion,
             'calificarServicio': self._CalificarServicio
         }
     
@@ -45,7 +45,7 @@ class Cliente(Persona):
         cliente._dni = data['dni']
         cliente._direccion = data['direccion']
         cliente._telefono = data['telefono']
-        cliente._TiempoAtencion = data['tiempo de atencion']
+        cliente._TiempoAtencion = data['tiempoAtencion']
         cliente._CalificarServicio = data['calificarServicio']
         return cliente
     

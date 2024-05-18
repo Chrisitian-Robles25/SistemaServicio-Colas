@@ -1,0 +1,39 @@
+{% extends "template.html" %}
+{% block content %}
+<h2 class="text-white">Lista de clientes</h2>
+<div class="booking-form-body">
+    <a href="/clientes/ver" class="btn btn-danger">AGREGAR</a>
+    <table id="tabla" class="table text-white">
+        <thead>
+            <tr>
+                <th>Nro</th>
+                <th>Cliente</th>
+                <th>DNI</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <th>Tiempo de atencion</th>
+                <th>Calificacion de servicio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in lista %}
+                <tr>
+                    <td>1</td>
+                    <td>{{ item.apellido }} {{ item.nombre }}</td>
+                    <td>{{ item.dni }}</td>
+                    <td>{{ item.direccion }}</td>
+                    <td>{{ item.telefono }}</td>
+                    <td>{{ item.tiempoAtencion }}</td>
+                    <td>{{ item.calificarServicio }}</td>
+                    <td>
+                        <a href="/clientes/editar/{{ item.id }}" class="btn btn-warning">Editar</a>
+                        <a href="/clientes/eliminar/{{ item.id }}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor%}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
