@@ -39,7 +39,7 @@ class DaoAdapter(Generic[T]):
         aux = []
         self._list()
         for i in range(0, self.lista._lenght):
-            aux.append(self.lista.get(i).serializable)
+            aux.append(self.lista.get(i).serializar)
         return aux
     
     def _save(self, data: T) -> T:
