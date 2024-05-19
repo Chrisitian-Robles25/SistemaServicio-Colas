@@ -1,20 +1,19 @@
 import sys
+import os
+import psutil
 sys.path.append('../')
+from time import time
 
 from controls.personaDaoControl import PersonaDaoControl
 from controls.clienteDaoControl import ClienteDaoControl
 from controls.registroDaoControl import RegistroDaoControl
 from controls.tda.queque.queque import Queque
 from controls.tda.arrayList.arrayList import ArrayList
-#persona = Persona()
-#personaDC = PersonaDaoControl()
-#CREAR UN OBJETO PARA DARLE QUEQUE Con un tamaño de 5
-#queque = Queque(3)
+
 clienteDC = ClienteDaoControl()
 registroDC = RegistroDaoControl()
-#myList = ArrayList()
 try:
-
+    Inicio = time()
     clienteDC._cliente._nombre = "Christian"
     clienteDC._cliente._apellido = "Robles"
     clienteDC._cliente._dni = "1105549602"
@@ -23,8 +22,7 @@ try:
     clienteDC._cliente._TiempoAtencion = "00:25"
     clienteDC._cliente._CalificarServicio = "Excelente"
     clienteDC.save
-    #queque.queque(clienteDC)
-    #myList.__addFirst__(clienteDC)
+    
     clienteDC._cliente._nombre = "Esteban"
     clienteDC._cliente._apellido = "Leon"
     clienteDC._cliente._dni = "0778465219"
@@ -33,8 +31,6 @@ try:
     clienteDC._cliente._TiempoAtencion = "01:12"
     clienteDC._cliente._CalificarServicio = "Malo"
     clienteDC.save
-    #queque.queque(clienteDC)
-    #myList.__addLast__(clienteDC)
 
     clienteDC._cliente._nombre = "Santiago"
     clienteDC._cliente._apellido = "Tamayo"
@@ -43,17 +39,22 @@ try:
     clienteDC._cliente._telefono = "0978461385"
     clienteDC._cliente._TiempoAtencion = "00:45"
     clienteDC._cliente._CalificarServicio = "Regular"
-    clienteDC.save
-    #queque.queque(clienteDC)
+    clienteDC.save    
+
+    #Se calcula el tiempo de ejecución del programa
+    FIN = time()
+    Total = FIN - Inicio
+    print(f"El tiempo de ejecución del programa es: {Total} segundos")
+
+    # Calcula la memoria utilizada
+    process = psutil.Process(os.getpid())
+    memory_usage = process.memory_info().rss / 1024 ** 2
+    print(f"La memoria utilizada por el programa es: {memory_usage} MB")
     
-
-    registroDC._registro._servidor = "V1-Wilman Sanchez"
-    registroDC._registro._fecha = "18/05/2024"
-    registroDC._registro._clienteDni = "1105549602"
-    registroDC.save
-
-
-    #queque.queque(clienteDC)
-    #print (queque)
 except Exception as error:
     print(error.args)
+
+    #registroDC._registro._servidor = "V1-Wilman Sanchez"
+    #registroDC._registro._fecha = "18/05/2024"
+    #registroDC._registro._clienteDni = "1105549602"
+    #registroDC.save

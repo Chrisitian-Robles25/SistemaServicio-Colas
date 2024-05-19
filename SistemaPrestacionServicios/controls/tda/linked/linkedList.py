@@ -1,3 +1,4 @@
+import sys
 from controls.tda.linked.node import Node
 from controls.exception.arrayPositionException import ArrayPositionException
 from controls.exception.linkedEmpty import LinkedEmpty
@@ -122,6 +123,18 @@ class LinkedList(object):
             node_preview._next = node_last._next
             self.__lenght -= 1 
     
+    #funcion para conocer el almacenamiento de la lista
+    @property
+    def _sizeList_(self):
+        # Tamaño de los atributos de la lista
+        size = sys.getsizeof(self._head) + sys.getsizeof(self.last) + sys.getsizeof(self._length)
+        
+        # Tamaño de cada nodo
+        node_size = sys.getsizeof(Node)  # Suponiendo que Node() devuelve un nuevo nodo
+        size += node_size * self.__length
+         # Convertir a megabytes
+        return size
+
     @property
     def print(self):
        node = self.__head

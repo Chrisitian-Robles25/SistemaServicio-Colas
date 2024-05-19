@@ -3,7 +3,7 @@ from controls.exception.linkedEmpty import LinkedEmpty
 
 class ArrayList:
     def __init__(self):
-        self.data = []  # Usamos una lista estándar para almacenar objetos Cliente
+        self.data = []  # Usamos una lista estándar 
 
     def __addFirst__(self, element):
         self.data.insert(0, element)
