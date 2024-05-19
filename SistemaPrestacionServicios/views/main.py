@@ -5,13 +5,14 @@ from controls.personaDaoControl import PersonaDaoControl
 from controls.clienteDaoControl import ClienteDaoControl
 from controls.registroDaoControl import RegistroDaoControl
 from controls.tda.queque.queque import Queque
-
+from controls.tda.arrayList.arrayList import ArrayList
 #persona = Persona()
 #personaDC = PersonaDaoControl()
 #CREAR UN OBJETO PARA DARLE QUEQUE Con un tamaño de 5
 #queque = Queque(3)
 clienteDC = ClienteDaoControl()
 registroDC = RegistroDaoControl()
+#myList = ArrayList()
 try:
 
     clienteDC._cliente._nombre = "Christian"
@@ -23,7 +24,7 @@ try:
     clienteDC._cliente._CalificarServicio = "Excelente"
     clienteDC.save
     #queque.queque(clienteDC)
-    
+    #myList.__addFirst__(clienteDC)
     clienteDC._cliente._nombre = "Esteban"
     clienteDC._cliente._apellido = "Leon"
     clienteDC._cliente._dni = "0778465219"
@@ -33,6 +34,7 @@ try:
     clienteDC._cliente._CalificarServicio = "Malo"
     clienteDC.save
     #queque.queque(clienteDC)
+    #myList.__addLast__(clienteDC)
 
     clienteDC._cliente._nombre = "Santiago"
     clienteDC._cliente._apellido = "Tamayo"
@@ -43,6 +45,7 @@ try:
     clienteDC._cliente._CalificarServicio = "Regular"
     clienteDC.save
     #queque.queque(clienteDC)
+    
 
     registroDC._registro._servidor = "V1-Wilman Sanchez"
     registroDC._registro._fecha = "18/05/2024"
