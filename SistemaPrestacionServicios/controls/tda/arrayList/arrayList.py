@@ -1,3 +1,4 @@
+import sys
 from controls.exception.arrayPositionException import ArrayPositionException
 from controls.exception.linkedEmpty import LinkedEmpty
 
@@ -33,6 +34,6 @@ class ArrayList:
             return self.data.index(element)
         except ValueError:
             return -1
-
+    
     def __str__(self):
         return str(self.data)

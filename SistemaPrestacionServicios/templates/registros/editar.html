@@ -10,13 +10,18 @@
             <input type="hidden" name="id" value="{{data._id}}"/>
             <div class="row">
                 <div class="col-lg-6 col-12">
-                    <input type="text" value="{{data._servidor}}" name="servidor" class="form-control" placeholder="Nombre del servidor Publico" required>
-                </div>
-                <div class="col-lg-6 col-12">
                     <input type="date" value="{{data._fecha}}" name="fecha" class="form-control" placeholder="fecha dd/mm/aaaa" required>
                 </div>
                 <div class="col-lg-6 col-12">
                     <input type="text" value="{{data._clienteDni}}" name="clienteDni" class="form-control" placeholder="DNI cliente" required>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <b class="text-white">Seleccione el servidor publico</b><br>
+                    <form>
+                        <input type="radio" name="servidor" value="V1-Wilman Sanchez"> <label class="text-white" >Ventana 1 - Wilman Sanchez</label><br>
+                        <input type="radio" name="servidor" value="V2-Mario Tolero"> <label class="text-white" >Ventanilla 2 - Mario Tolero</label><br>
+                        <input type="radio" name="servidor" value="V3-Ximena Lopez"> <label class="text-white" >Ventanilla 3 - Ximena Lopez</label><br>
+                    </form>
                 </div>
                 <div class="col-lg-4 col-md-10 col-8 mx-auto mt-2">
                     <button id="boton" type="submit" class="form-control btn btn-success">Guardar</button>

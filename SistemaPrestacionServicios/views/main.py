@@ -11,7 +11,7 @@ from controls.tda.queque.queque import Queque
 from controls.tda.arrayList.arrayList import ArrayList
 
 clienteDC = ClienteDaoControl()
-registroDC = RegistroDaoControl()
+#registroDC = RegistroDaoControl()
 try:
     Inicio = time()
     clienteDC._cliente._nombre = "Christian"
@@ -39,7 +39,9 @@ try:
     clienteDC._cliente._telefono = "0978461385"
     clienteDC._cliente._TiempoAtencion = "00:45"
     clienteDC._cliente._CalificarServicio = "Regular"
-    clienteDC.save    
+    clienteDC.save  
+    clienteDC._lista._lenghtLista_
+    print("El tamaño de la lista es: ", clienteDC._lista._lenghtLista_, "kilobytes")
 
     #Se calcula el tiempo de ejecución del programa
     FIN = time()
@@ -54,7 +56,22 @@ try:
 except Exception as error:
     print(error.args)
 
-    #registroDC._registro._servidor = "V1-Wilman Sanchez"
-    #registroDC._registro._fecha = "18/05/2024"
-    #registroDC._registro._clienteDni = "1105549602"
-    #registroDC.save
+    #registroDC._lista._lenghtLista_
+    #print("El tamaño de la lista es: ", registroDC._lista._lenghtLista_, "kilobytes")
+
+      
+
+    """ registroDC._registro._servidor = "V1-Wilman Sanchez"
+    registroDC._registro._fecha = "18/05/2024"
+    registroDC._registro._clienteDni = "1105549602"
+    registroDC.save
+    
+    registroDC._registro._servidor = "V1-Wilman Sanchez"
+    registroDC._registro._fecha = "18/05/2024"
+    registroDC._registro._clienteDni = "0778465219"
+    registroDC.save
+
+    registroDC._registro._servidor = "V1-Wilman Sanchez"
+    registroDC._registro._fecha = "18/05/2024"
+    registroDC._registro._clienteDni = "1978495614"
+    registroDC.save """

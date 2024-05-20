@@ -2,8 +2,9 @@ from controls.dao.daoAdapter import DaoAdapter
 from models.registro import Registro
 from controls.tda.queque.queque import Queque
 from controls.dao.arrayDaoAdapter import ArrayDaoAdapter
+from controls.dao.quequeAdaoAdapter import QuequeDaoAdapter
 
-class RegistroDaoControl(ArrayDaoAdapter):
+class RegistroDaoControl(DaoAdapter):
     def __init__(self):
         super().__init__(Registro)
         self.__registro = None
@@ -22,6 +23,11 @@ class RegistroDaoControl(ArrayDaoAdapter):
     def _lista(self):
         return self._list()
     
+    """ @property
+    def save(self):
+        self._registro._id = len(self._lista.data) + 1
+        self._save(self._registro)  """
+
     @property
     def save(self):
         self._registro._id = self._lista._lenght + 1

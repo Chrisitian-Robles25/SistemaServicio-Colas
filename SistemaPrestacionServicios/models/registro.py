@@ -5,7 +5,7 @@ class Registro:
     def __init__(self):
         self.__fecha = ''
         self.__servidor = '' 
-        self.__clienteDni = ''
+        self.__clienteDni = '' #clientes
 
     @property
     def _id(self):

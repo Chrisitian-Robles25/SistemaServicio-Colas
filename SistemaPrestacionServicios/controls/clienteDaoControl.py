@@ -4,7 +4,7 @@ from controls.tda.queque.queque import Queque
 from controls.dao.arrayDaoAdapter import ArrayDaoAdapter
 from models.cliente import Cliente
 
-class ClienteDaoControl (ArrayDaoAdapter):
+class ClienteDaoControl (DaoAdapter):
     def __init__(self):
         super().__init__(Cliente)
         self.__cliente = None
@@ -23,9 +23,14 @@ class ClienteDaoControl (ArrayDaoAdapter):
     def _lista(self):
         return self._list()
     
+    """ @property
+    def save(self):
+        self._cliente.id = len(self._lista.data) + 1 
+        self._save(self._cliente) """
+
     @property
     def save(self):
-        self._cliente.id_cliente = len(self._lista.data) + 1  # Ajustamos el id automáticamente
+        self._cliente._id = self._lista._lenght + 1  # Ajustamos el id automáticamente
         self._save(self._cliente)
 
     def merge(self, pos):

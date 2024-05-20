@@ -125,15 +125,11 @@ class LinkedList(object):
     
     #funcion para conocer el almacenamiento de la lista
     @property
-    def _sizeList_(self):
-        # Tamaño de los atributos de la lista
-        size = sys.getsizeof(self._head) + sys.getsizeof(self.last) + sys.getsizeof(self._length)
-        
-        # Tamaño de cada nodo
-        node_size = sys.getsizeof(Node)  # Suponiendo que Node() devuelve un nuevo nodo
-        size += node_size * self.__length
-         # Convertir a megabytes
-        return size
+    def _lenghtLista_(self):
+        lenght = sys.getsizeof(self.__head) + sys.getsizeof(self.__last) + sys.getsizeof(self.__lenght)
+        node_lenght = sys.getsizeof(Node) 
+        lenght += node_lenght * self.__lenght
+        return lenght
 
     @property
     def print(self):
