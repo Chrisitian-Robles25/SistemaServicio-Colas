@@ -1,8 +1,6 @@
 from controls.dao.daoAdapter import DaoAdapter
 from models.registro import Registro
-from controls.tda.queque.queque import Queque
-from controls.dao.arrayDaoAdapter import ArrayDaoAdapter
-from controls.dao.quequeAdaoAdapter import QuequeDaoAdapter
+
 
 class RegistroDaoControl(DaoAdapter):
     def __init__(self):

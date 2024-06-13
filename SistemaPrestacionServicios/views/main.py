@@ -1,20 +1,55 @@
 import sys
 import os
-import psutil
+
 sys.path.append('../')
 from time import time
+import random
 
 from controls.personaDaoControl import PersonaDaoControl
 from controls.clienteDaoControl import ClienteDaoControl
 from controls.registroDaoControl import RegistroDaoControl
-from controls.tda.queque.queque import Queque
-from controls.tda.arrayList.arrayList import ArrayList
+from controls.tda.linked.linkedList import LinkedList
+sys.setrecursionlimit(3000)  # El valor predeterminado suele ser 1000
 
-clienteDC = ClienteDaoControl()
+#clienteDC = ClienteDaoControl()
 #registroDC = RegistroDaoControl()
+
+def load_random_numbers():
+    numbers = []
+    with open('random_numbers.txt', 'r') as file:
+        for line in file:
+            numbers.append(int(line.strip()))
+    return numbers
+    
+    random_numbers = [round(random.random() * 24999) for _ in range(24999)]
+    with open('random_numbers.txt', 'w') as file:
+        for number in random_numbers:
+            file.write(f"{number}\n")
+
+def read_numbers_from_file(filename):
+    with open(filename, 'r') as file:
+        numbers = file.read().split()
+    return [int(number) for number in numbers]
+
 try:
+    lista = LinkedList()
+    numbers = read_numbers_from_file('random_numbers.txt')
+    for number in numbers:
+        lista.add(number)
+
     Inicio = time()
-    clienteDC._cliente._nombre = "Christian"
+    
+    lista.sort(1)
+    lista.print
+    
+    FIN = time()
+    Total = FIN - Inicio
+    print(f"El tiempo de ejecución del programa es: {Total} segundos")
+
+except Exception as error:
+    print(error.args)
+
+    """ clienteDC._cliente._nombre = "Christian"
     clienteDC._cliente._apellido = "Robles"
     clienteDC._cliente._dni = "1105549602"
     clienteDC._cliente._direccion = "Alamor"
@@ -41,20 +76,17 @@ try:
     clienteDC._cliente._CalificarServicio = "Regular"
     clienteDC.save  
     clienteDC._lista._lenghtLista_
-    print("El tamaño de la lista es: ", clienteDC._lista._lenghtLista_, "kilobytes")
+    print("El tamaño de la lista es: ", clienteDC._lista._lenghtLista_, "kilobytes") """
 
-    #Se calcula el tiempo de ejecución del programa
-    FIN = time()
-    Total = FIN - Inicio
-    print(f"El tiempo de ejecución del programa es: {Total} segundos")
 
-    # Calcula la memoria utilizada
-    process = psutil.Process(os.getpid())
-    memory_usage = process.memory_info().rss / 1024 ** 2
-    print(f"La memoria utilizada por el programa es: {memory_usage} MB")
-    
-except Exception as error:
-    print(error.args)
+
+
+
+
+
+
+
+
 
     #registroDC._lista._lenghtLista_
     #print("El tamaño de la lista es: ", registroDC._lista._lenghtLista_, "kilobytes")

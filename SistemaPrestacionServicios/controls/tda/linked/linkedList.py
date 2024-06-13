@@ -3,6 +3,14 @@ from controls.tda.linked.node import Node
 from controls.exception.arrayPositionException import ArrayPositionException
 from controls.exception.linkedEmpty import LinkedEmpty
 
+from numbers import Number
+from controls.tda.linked.ordenacion.shellSort import ShellSort
+from controls.tda.linked.ordenacion.quickSort import QuickSort
+from controls.tda.linked.ordenacion.mergeSort import MergeSort
+from controls.tda.linked.busqueda.binary import Binary
+from controls.tda.linked.busqueda.binarySecuencial import BinarySecuencial
+from controls.tda.linked.busqueda.secuencial import Secuencial
+
 class LinkedList(object):
     def __init__(self):
         self.__head = None
@@ -131,12 +139,197 @@ class LinkedList(object):
         lenght += node_lenght * self.__lenght
         return lenght
 
+
+
+
+
+    def _get(self, id):
+        list = self._list()
+        array = list.toArray
+        for i in range(0, len(array)):
+            if array[i]._id == id:
+                return array[i]
+        return None
+
+
+
+
+
+    #Convierte una lista a un array -------------------------------------------------------------------------------------------
     @property
+    def toArray(self):
+        array = []
+        if not self.isEmpty:
+            node = self.__head
+            cont = 0
+            while cont < self._lenght:
+                array.append(node._data)
+                cont += 1
+                node = node._next
+        return array
+    #Convierte un array a una lista -------------------------------------------------------------------------------------------
+    def toList(self, array):
+        self.clear
+        for i in range (0, len(array)):
+            #self.__addLast__(array.get[i])
+            self.__addLast__(array[i])
+
+    #Ordenamiento de la lista-------------------------------------------------------------------------------------------------
+    def sort(self, type):
+        if self.isEmpty:
+            raise LinkedEmpty("List empty")
+        else:
+            array = self.toArray
+            if isinstance(array[0], Number) or isinstance(array[0], str):
+                #order = ShellSort()
+                #order = MergeSort()
+                order = QuickSort()
+                if type == 1:
+                    array = order.sort_primitive_ascendent(array)
+                else:
+                    array = order.sort_primitive_descendent(array)
+            self.toList(array)
+
+    def sort_models(self, attribute, type = 1):
+        if self.isEmpty:
+            raise LinkedEmpty("List empty")
+        else:
+            array = self.toArray
+            if isinstance(array[0], object):
+                #order = ShellSort()
+                #order = MergeSort()
+                order = QuickSort()
+                if type == 1:
+                    array = order.sort_models_ascendent(array, attribute)
+                else:
+                    array = order.sort_models_descendent(array, attribute)
+            
+            self.toList(array)
+        return self
+
+
+    #---------------BUSQUEDA SECUENCIAL-----------------------------------------------------------------------------------------------------------
+
+    def search_equals(self, data):
+        list = LinkedList()
+        if self.isEmpty:
+            raise LinkedEmpty("List empty")
+        else:
+            array = self.toArray
+            for i in range(0, len(array)):
+                if array[i].lower().startswith(data.lower()): #array[i] == data:
+                    list.add(array[i], list._length)
+        return list
+
+    def search_equals_number(self, number):
+        list = LinkedList()
+        if self.isEmpty:
+            raise LinkedEmpty("List empty")
+        else:
+            array = self.toArray
+            for i in range(len(array)):
+                if array[i] == number:
+                    list.add(array[i], list._lenght)
+        #imprimir el numero de ocurrencia que se encontraron
+        print(f"El número {number} fue encontrado {list._lenght} veces")
+        return list
+
+
+
+    
+    def search_binary(self, element):
+        if self.isEmpty:
+            raise LinkedEmpty("List empty")
+        else:
+            array = self.toArray
+            search = Binary()
+            index = search.search_binary(array, element)
+            if index == -1:
+                print(f"Elemento {element} no encontrado")
+            else:
+                print(f"Elemento {element} encontrado en el índice: {index}")
+        
+        self.toList(array)
+        return self
+
+    def search_binary_models(self, element, attribute):
+        if self.isEmpty:
+            raise LinkedEmpty("List empty")
+        else:
+            array = self.toArray
+            search = Binary()
+            index = search.search_binary_models(array, element, attribute)
+            if index == -1:
+                print(f"Models con {attribute} = {element} no encontrado")
+            else:
+                print(f"Models con {attribute} = {element} encontrado en el objeto: {index}")
+        
+        self.toList(array)
+        return self
+
+#--------------------------Binario Secuencial------------------------------------------------------------------------------------------------
+    def search_binarySecuencial(self, element):
+        if self.isEmpty:
+            raise LinkedEmpty("List empty")
+        else:
+            array = self.toArray
+            search = BinarySecuencial()
+            index = search.search_BinarySecuencial(array, element)
+            if index == -1:
+                print(f"Elemento {element} no encontrado")
+            else:
+                print(f"Elemento {element} fue encontrado en estas ocasiones: {index}")
+        
+        self.toList(array)
+        return self
+
+    def search_binarySecuencial_models(self, element, attribute):
+        if self.isEmpty:
+            raise LinkedEmpty("List empty")
+        else:
+            init(autoreset=True)
+            array = self.toArray
+            search = BinarySecuencial()
+            index = search.search_BinarySecuencial_models(array, element, attribute)
+            if index == -1:
+                print(f"Models con {attribute} = {element} no encontrado")
+            else:
+                print(f"{Fore.GREEN}los modelos con {attribute} = {element} fueron encontrados en: ") #{index}
+                #imprimir los objetos de index
+                for i in range(0, len(index)):
+                    print(index[i])
+        self.toList(array)
+        return self
+        
+    #-------------------------- Secuencial------------------------------------------------------------------------------------------------
+    
+
+    def __str__(self) -> str:
+        out = ""
+        if self.isEmpty:
+            out = "List is Empty"
+        else:
+            node = self.__head
+            while node != None:
+                out += str(node._data)+ "\t"
+                node = node._next
+        return out
+
+    @property
+    def print(self):
+        node = self.__head
+        data = ""    
+        while node != None:
+            data += str(node._data)+"    "            
+            node = node._next
+        print("Lista de datos")
+        print(data)
+    """ @property
     def print(self):
        node = self.__head
        data = ''
 
        while node != None:
             data += str(node._data._id)+ '    '
-            node = node._next
-            print(data)
+            node = node._next            
+            print(data) """

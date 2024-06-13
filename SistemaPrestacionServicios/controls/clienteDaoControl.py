@@ -1,7 +1,6 @@
-from controls.dao.quequeAdaoAdapter import QuequeDaoAdapter
+
 from controls.dao.daoAdapter import DaoAdapter
-from controls.tda.queque.queque import Queque
-from controls.dao.arrayDaoAdapter import ArrayDaoAdapter
+
 from models.cliente import Cliente
 
 class ClienteDaoControl (DaoAdapter):
