@@ -175,30 +175,36 @@ class LinkedList(object):
             self.__addLast__(array[i])
 
     #Ordenamiento de la lista-------------------------------------------------------------------------------------------------
-    def sort(self, type):
+    def sort(self, type, metodo = 1):
         if self.isEmpty:
             raise LinkedEmpty("List empty")
         else:
             array = self.toArray
             if isinstance(array[0], Number) or isinstance(array[0], str):
-                #order = ShellSort()
-                #order = MergeSort()
-                order = QuickSort()
+                if metodo == 1:
+                    order = QuickSort()
+                elif metodo == 2:
+                    order = MergeSort()
+                else:
+                    order = ShellSort()
                 if type == 1:
                     array = order.sort_primitive_ascendent(array)
                 else:
                     array = order.sort_primitive_descendent(array)
             self.toList(array)
 
-    def sort_models(self, attribute, type = 1):
+    def sort_models(self, attribute, type = 1, metodo = 1):
         if self.isEmpty:
             raise LinkedEmpty("List empty")
         else:
             array = self.toArray
             if isinstance(array[0], object):
-                #order = ShellSort()
-                #order = MergeSort()
-                order = QuickSort()
+                if metodo == 1:
+                    order = QuickSort()
+                elif metodo == 2:
+                    order = MergeSort()
+                else:
+                    order = ShellSort()
                 if type == 1:
                     array = order.sort_models_ascendent(array, attribute)
                 else:
@@ -231,10 +237,10 @@ class LinkedList(object):
                 if array[i] == number:
                     list.add(array[i], list._lenght)
         #imprimir el numero de ocurrencia que se encontraron
-        print(f"El número {number} fue encontrado {list._lenght} veces")
+        #print(f"El número {number} fue encontrado {list._lenght} veces")
         return list
 
-
+    
 
     
     def search_binary(self, element):

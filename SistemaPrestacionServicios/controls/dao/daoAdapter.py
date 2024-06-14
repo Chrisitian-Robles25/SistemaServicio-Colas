@@ -37,11 +37,20 @@ class DaoAdapter(Generic[T]):
     
     def to_dict(self):
         aux = []
-        self._list()
-        for i in range(0, self.lista._lenght):
-            aux.append(self.lista.get(i).serializar)
+        lista = self._list()
+        arreglo = lista.toArray
+        for i in range(0, lista._lenght):
+            aux.append(arreglo[i].serializar)
         return aux
     
+    def to_dic_lista(self, lista):
+        aux = []
+        arreglo = lista.toArray
+        for i in range(0, lista._lenght):
+            aux.append(arreglo[i].serializar)
+        #print(aux)
+        return aux
+
     def _save(self, data: T) -> T:
         self._list()
         self.lista.add(data, self.lista._lenght)
@@ -56,6 +65,14 @@ class DaoAdapter(Generic[T]):
         a.write(self._transform_())
         a.close()
 
+    def _get(self, id):
+        list = self._list()
+        array = list.toArray
+        for i in range(0, len(array)):
+            if array[i]._id == id:
+                return array[i]
+        return None
+    
     def _delete(self, pos) -> T:
         self._list()
         self.lista.delete(pos)

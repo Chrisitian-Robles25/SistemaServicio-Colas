@@ -3,8 +3,10 @@ from flask import Blueprint, jsonify, make_response,abort, request, render_templ
 from controls.clienteDaoControl import ClienteDaoControl
 from controls.registroDaoControl import RegistroDaoControl
 
+
 router = Blueprint('api', __name__)
-    
+
+
 @router.route('/')
 def home():
     return render_template('template.html')
@@ -13,7 +15,26 @@ def home():
 @router.route('/clientes')
 def lista_clientes():
     cd = ClienteDaoControl()
+    
     return render_template('clientes/lista.html', lista = cd.to_dict())
+
+@router.route('/clientes/<tipo>/<attr>/<metodo>')
+def lista_clientes_ordenar(tipo, attr, metodo):
+    cd = ClienteDaoControl()
+    list = cd._list()
+    list.sort_models(attr, int(tipo), int(metodo))
+    #return render_template('clientes/lista.html', lista = cd.to_dict_lista(list))
+    return make_response(
+        jsonify({"msg":"OK", "code": 200, "data": cd.to_dic_lista(list)}),
+        200
+    )
+
+
+
+
+
+
+
 
 @router.route('/registros')
 def lista_registros():
@@ -33,7 +54,8 @@ def ver_guardar2():
 @router.route('/clientes/editar/<pos>')
 def ver_editar(pos):
     pd = ClienteDaoControl()
-    nene = pd._list().get(int(pos) -1)
+    print("ID NENE" + str(pos))
+    nene = pd._get(int(pos)) #pd._list().get(int(pos) -1)
     print(nene)
     return render_template("clientes/editar.html", data = nene )
 
