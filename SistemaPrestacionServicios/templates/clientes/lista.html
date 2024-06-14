@@ -31,7 +31,7 @@
                             $.each(data.data, function(i, info){
                                 console.log(info);
                                 html += '<tr>';
-                                html += '<td>' + i + '</td>';
+                                html += '<td>' + (i+1) + '</td>';
                                 html += '<td>' + info.apellido + " " + info.nombre + '</td>';
                                 html += '<td>' + info.dni + '</td>';
                                 html += '<td>' + info.direccion + '</td>';
@@ -39,9 +39,9 @@
                                 html += '<td>' + info.tiempoAtencion + '</td>';
                                 html += '<td>' + info.calificarServicio + '</td>';
                                 html += '<td>'+ '<a href="/clientes/editar/'+info.id +'" class="btn btn-warning">Editar</a>'+ '</td>';
-                                html += '</tr>';
                             });
-                        
+                            html += '</tr>';
+
                         
                         $('#tabla tbody').html(html);
                     }
@@ -70,10 +70,19 @@
 
 </script>
 
-<div class="booking-form-body">
+<div class="booking-form-body p-4">
     
-    <h3 class="text-white p-4">Lista de clientes</h3>
-    <div class="accordion" id="accordionExample">
+    <h3 class="text-white ">Lista de clientes</h3>
+    <select id="metodo" class="btn-group " role="group" aria-label="Basic example">
+        <option value="1" >QuickSort</option>
+        <option value="2" >MergeSort</option>
+        <option value="3" >ShellSort</option>
+    </select>
+    <a href="/clientes/ver" class="btn btn-danger" >Agregar cliente</a>
+    <!-- <button id="link" class="btn btn-danger" >ORDENAR</button> -->
+</div>
+
+    <!-- <div class="accordion" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -86,13 +95,7 @@
                     <div class="form-check form-switch align-items-center">
                         <input class="form-check-input" value="DESCENDENTE" type="checkbox" role="switch" id="tipo">Orden Descendente
                         
-                        <select id="metodo" class="btn-group" role="group" aria-label="Basic example">
-                            <option value="1" >QuickSort</option>
-                            <option value="2" >MergeSort</option>
-                            <option value="3" >ShellSort</option>
-                        </select>
-                        <a href="/clientes/ver" class="btn btn-danger" >AGREGAR</a>
-                        <button id="link" class="btn btn-danger" >ORDENAR</button>
+                        
                     </div>
                     <div class="col">
                         <select id="criterio" class="form-select" aria-label="Default select example">
@@ -106,20 +109,20 @@
                         </select>
                     </div>
                     
-                    <!-- <div class="col">
+                    <div class="col">
                         <select name="orden" class="from-select" aria-label="Default select example">
                             <option value="1">Ascendente</option>
                             <option value="2">Descendente</option>
                         </select>
                     </div>
-                    <div class="col"> -->
+                    <div class="col">
                         
-                        <!-- <select name="Metodo"class="from-select" aria-label="Default select example">
+                        <select name="Metodo"class="from-select" aria-label="Default select example">
                             <option value="1">QuickSort</option>
                             <option value="2">MergeSort</option>
                             <option value="3">ShellSort</option>
                         </select> 
-                    </div>-->
+                    </div>
                 </div>
 
             </div>
@@ -138,21 +141,22 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
     <br>
     <br>
-    <table id="example" class="table table-dark table-hover" >
+<div class="p-4">
+    <table id="tabla" class="table table-dark table-hover" >
         <thead>
             <tr>
-                <th class="btn" onclick="sortTable('_id')">Nro</th>
-                <th onclick="sortTable('_apellido')">Cliente</th>
-                <th onclick="sortTable('_dni')">DNI</th>
-                <th onclick="sortTable('_direccion')">Direccion</th>
-                <th onclick="sortTable('_telefono')">Telefono</th>
-                <th onclick="sortTable('_tiempoAtencion')">Tiempo de atencion HH:MM</th>
-                <th onclick="sortTable('_calificarServicio')">Calificacion de servicio</th>
-                <th>Acciones</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning" onclick="sortTable('_id')" >Nro </th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning" onclick="sortTable('_apellido')">Cliente</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning" onclick="sortTable('_dni')">DNI</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning" onclick="sortTable('_direccion')">Direccion</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning" onclick="sortTable('_telefono')">Telefono</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning" onclick="sortTable('_TiempoAtencion')">Tiempo de atencion HH:MM</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning" onclick="sortTable('_CalificarServicio')">Calificacion de servicio</th>
+                <th class="text-bg-warning" >Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -173,5 +177,7 @@
         </tbody>
     </table>
 </div>
+<script>
 
+</script>
 {% endblock %}

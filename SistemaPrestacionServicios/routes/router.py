@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, make_response,abort, request, render_template, redirect
+
 #from controls.personaDaoControl import PersonaDaoControl
 from controls.clienteDaoControl import ClienteDaoControl
 from controls.registroDaoControl import RegistroDaoControl
@@ -15,8 +16,9 @@ def home():
 @router.route('/clientes')
 def lista_clientes():
     cd = ClienteDaoControl()
-    
-    return render_template('clientes/lista.html', lista = cd.to_dict())
+    list = cd._list()
+    list.sort_models("_id",1)
+    return render_template('clientes/lista.html', lista = cd.to_dic_lista(list))
 
 @router.route('/clientes/<tipo>/<attr>/<metodo>')
 def lista_clientes_ordenar(tipo, attr, metodo):
