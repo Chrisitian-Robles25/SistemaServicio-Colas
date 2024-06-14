@@ -301,7 +301,7 @@ class LinkedList(object):
                 print(f"Models con {attribute} = {element} no encontrado")
             else:
                # print(f"{Fore.GREEN}los modelos con {attribute} = {element} fueron encontrados en: ") #{index}
-                #imprimir los objetos de index
+                
                 for i in range(0, len(index)):
                     aux.append(index[i])
         self.toList(aux)

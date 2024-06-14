@@ -1,37 +1,141 @@
 {% extends "template.html" %}
 {% block content %}
+<script>
+    $(document).ready(function () {
 
-<div class="booking-form-body">
-    <br>
-    <h3 class="text-white">Servidores Publicos</h3>
-    <a href="/registros/ver" class="btn btn-danger">AGREGAR</a>
-    
-    <br>
-    <br>
-    <table id="example" class="display">
+        $('#link').click(function () {
+            create();
+
+        });
+
+        $('#search').keyup(function () {
+            search();
+        });
+    });
+
+
+
+    function search() {
+        const atributo = $("#atributo").val();
+        const search = $('#search').val().toUpperCase();
+
+        tabla("http://localhost:5000/registros/search/" + search + "/" + atributo);
+    }
+
+    let currentSortOrder = 1;
+    function sortTable(attribute) {
+        const sortOrder = currentSortOrder;
+        currentSortOrder = (currentSortOrder === 1) ? 2 : 1;
+
+        const metodo = $('#metodo').find(":selected").val();
+        tabla("http://localhost:5000/registros/" + sortOrder + "/" + attribute + "/" + metodo);
+    }
+
+    function tabla(url) {
+        $.ajax({
+            method: "GET",
+            url: url,
+            contentType: "json",
+            success: function (data) {
+                //console.log(data);
+                if (data.code == '200') {
+                    var html = '';
+                    $.each(data.data, function (i, info) {
+                        console.log(info);
+                        html += '<tr>';
+                        html += '<td>' + (i + 1) + '</td>';
+                        html += '<td>' + info.servidor + '</td>';
+                        html += '<td>' + info.fecha + '</td>';
+                        html += '<td>' + info.clienteDni + '</td>';
+                        html += '<td>' + '<a href="/registros/editar/' + info.id + '" class="btn btn-warning">Editar</a>' + '</td>';
+                    });
+                    html += '</tr>';
+
+
+                    $('#tabla tbody').html(html);
+                }
+            }
+        });
+    }
+
+</script>
+
+<div class="booking-form-body p-4">
+    <div class="row p-4">
+        <div class="col">
+            <h3 class="text-white ">Servidores Publicos</h3>
+        </div>
+        <div class="col"> </div>
+        <a href="/registros/ver" class="btn btn-danger col">Agregar servidores</a>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <select id="metodo" class="form-select" aria-label="Default select example" role="group">
+                    <option selected>Metodo de ordenacion</option>
+                    <option value="1">QuickSort</option>
+                    <option value="2">MergeSort</option>
+                    <option value="3">ShellSort</option>
+                </select>
+            </div>
+
+            <div class="col">
+                <select id="atributo" class="form-select " aria-label="Default select example" role="group">
+                    <option selected>atributo</option>
+                    <option value="_servidor">Servidor Publico</option>
+                    <option value="_fecha">Fecha de atencion</option>
+                    <option value="_clienteDni">DNI de clientes</option>
+
+                </select>
+            </div>
+
+            <div class="col">
+                <search>
+                    <form class="form-horizontal" role="form" method="get">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="search" name="search" placeholder="Buscar">
+                            </div>
+                        </div>
+                    </form>
+                </search>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="p-4">
+    <table id="tabla" class="table table-dark table-hover">
         <thead>
             <tr>
-                <th>Nro</th>
-                <th>Servidor Publico</th>
-                <th>Fecha de atencion</th>
-                <th>DNI de clientes</th>
-                <th>Acciones</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning"
+                onclick="sortTable('_id')">Nro</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning"
+                onclick="sortTable('_servidor')">Servidor Publico</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning"
+                onclick="sortTable('_fecha')">Fecha de atencion</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning"
+                onclick="sortTable('_clienteDni')">DNI de clientes</th>
+                <th class="text-bg-warning">Acciones</th>
             </tr>
         </thead>
         <tbody>
             {% for item in lista %}
-                <tr>
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.servidor }}</td>
-                    <td>{{ item.fecha }}</td>
-                    <td>{{ item.clienteDni }}</td>
-                    <td>
-                        <a href="/registros/editar/{{ item.id }}" class="btn btn-warning">Editar</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.servidor }}</td>
+                <td>{{ item.fecha }}</td>
+                <td>{{ item.clienteDni }}</td>
+                <td>
+                    <a href="/registros/editar/{{ item.id }}" class="btn btn-warning">Editar</a>
+                </td>
+            </tr>
             {% endfor%}
         </tbody>
     </table>
 </div>
-
+</div>
 {% endblock %}

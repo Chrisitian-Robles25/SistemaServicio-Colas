@@ -17,10 +17,15 @@ class Secuencial:
         return array[left:right + 1]
     
     def search_sequential_models(self, array, element, attribute, index):
+        # Convertir el elemento a mayúsculas para la comparación
+        element = element.upper()
+        
+        # Convertir los atributos de los objetos a mayúsculas para la comparación
         left = index
         right = index
-        while left > 0 and getattr(array[left - 1], attribute) == element:
+        while left > 0 and getattr(array[left - 1], attribute).upper() == element:
             left -= 1
-        while right < len(array) - 1 and getattr(array[right + 1], attribute) == element:
+        while right < len(array) - 1 and getattr(array[right + 1], attribute).upper() == element:
             right += 1
+        
         return array[left:right + 1]

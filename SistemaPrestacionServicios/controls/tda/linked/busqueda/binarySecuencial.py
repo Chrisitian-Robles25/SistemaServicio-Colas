@@ -26,5 +26,5 @@ class BinarySecuencial:
         index = binary.search_binary_models(sorted_array, element, attribute)
         if index == -1:
             return -1
-        print(secuencial.search_sequential_models(sorted_array, element, attribute, index))
+        #print(secuencial.search_sequential_models(sorted_array, element, attribute, index))
         return secuencial.search_sequential_models(sorted_array, element, attribute, index)

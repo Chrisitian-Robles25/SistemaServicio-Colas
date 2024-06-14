@@ -38,15 +38,20 @@ class Binary:
     def search_binary_models(self, array, element, attribute):
         quickSort = QuickSort()
         array = quickSort.sort_models_ascendent(array, attribute)
+        
+        element = element.upper()# Convertir el elemento buscado a mayúsculas
         left = 0
         right = len(array) - 1
         while left <= right:
             middle = (left + right) // 2
-            if getattr(array[middle], attribute) == element:
+            middle_value = getattr(array[middle], attribute).upper()  # Convertir el valor del atributo a mayúsculas
+
+            if middle_value == element:
                 return middle
-            elif getattr(array[middle], attribute) < element:
+            elif middle_value < element:
                 left = middle + 1
             else:
                 right = middle - 1
+
         return -1
     

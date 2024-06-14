@@ -1,151 +1,156 @@
 {% extends "template.html" %}
 {% block content %}
 <script>
-    $(document).ready(function() {
-            
-            $('#link').click(function() {
-                create();
-                
-            });
+    $(document).ready(function () {
 
-            $('#search').keyup(function() {
-                search();
-            }); 
+        $('#link').click(function () {
+            create();
+
         });
 
-        let currentSortOrder = 1; 
+        $('#search').keyup(function () {
+            search();
+        });
+    });
 
-        function search() {
-            const metodo = $('#metodoSearch').find(':checked').val();
-            const atributo = $("#atributo").val();
-            const search = $('#search').val();
-            console.log(metodo, search);
-            tabla("http://localhost:5000/clientes/search/"+search+"/"+metodo);
-        }
+    
 
-        function sortTable(attribute) {
-            const sortOrder = currentSortOrder;
-            currentSortOrder = (currentSortOrder === 1) ? 2 : 1;
+    function search() {
+        const atributo = $("#atributo").val();
+        const search = $('#search').val().toUpperCase();
+       
+        tabla("http://localhost:5000/clientes/search/" + search + "/" + atributo);
+    }
 
-            const metodo = $('#metodo').find(":selected").val();
-            tabla("http://localhost:5000/clientes/"+sortOrder+"/"+attribute+"/"+metodo);
-        }
+    let currentSortOrder = 1;
+    function sortTable(attribute) {
+        const sortOrder = currentSortOrder;
+        currentSortOrder = (currentSortOrder === 1) ? 2 : 1;
 
-        function tabla(url) {
-            $.ajax({
-                method: "GET",
-                url: url,
-                contentType: "json",
-                success: function(data){
-                    //console.log(data);
-                    if(data.code == '200'){
-                        var html = '';
-                            $.each(data.data, function(i, info){
-                                console.log(info);
-                                html += '<tr>';
-                                html += '<td>' + (i+1) + '</td>';
-                                html += '<td>' + info.apellido + " " + info.nombre + '</td>';
-                                html += '<td>' + info.dni + '</td>';
-                                html += '<td>' + info.direccion + '</td>';
-                                html += '<td>' + info.telefono + '</td>';
-                                html += '<td>' + info.tiempoAtencion + '</td>';
-                                html += '<td>' + info.calificarServicio + '</td>';
-                                html += '<td>'+ '<a href="/clientes/editar/'+info.id +'" class="btn btn-warning">Editar</a>'+ '</td>';
-                            });
-                            html += '</tr>';
+        const metodo = $('#metodo').find(":selected").val();
+        tabla("http://localhost:5000/clientes/" + sortOrder + "/" + attribute + "/" + metodo);
+    }
 
-                        
-                        $('#tabla tbody').html(html);
-                    }
+    function tabla(url) {
+        $.ajax({
+            method: "GET",
+            url: url,
+            contentType: "json",
+            success: function (data) {
+                //console.log(data);
+                if (data.code == '200') {
+                    var html = '';
+                    $.each(data.data, function (i, info) {
+                        console.log(info);
+                        html += '<tr>';
+                        html += '<td>' + (i + 1) + '</td>';
+                        html += '<td>' + info.apellido + " " + info.nombre + '</td>';
+                        html += '<td>' + info.dni + '</td>';
+                        html += '<td>' + info.direccion + '</td>';
+                        html += '<td>' + info.telefono + '</td>';
+                        html += '<td>' + info.tiempoAtencion + '</td>';
+                        html += '<td>' + info.calificarServicio + '</td>';
+                        html += '<td>' + '<a href="/clientes/editar/' + info.id + '" class="btn btn-warning">Editar</a>' + '</td>';
+                    });
+                    html += '</tr>';
+
+
+                    $('#tabla tbody').html(html);
                 }
-            });
-        }
+            }
+        });
+    }
 
 </script>
 
 <div class="booking-form-body p-4">
+    <div class="row p-4">
+        <div class="col"> <h3 class="text-white ">Lista de clientes</h3> </div>
+        <div class="col">  </div>
+        <a href="/clientes/ver" class="btn btn-danger col">Agregar cliente</a>
+    </div>
     
-    <h3 class="text-white ">Lista de clientes</h3>
     <div class="container">
         <div class="row">
-          <div class="col">
-            <select id="metodo" class="form-select"  aria-label="Default select example" role="group" >
-                <option selected>Metodo de ordenacion</option>
-                <option value="1" >QuickSort</option>
-                <option value="2" >MergeSort</option>
-                <option value="3" >ShellSort</option>
-            </select>
-          </div>
-          <div class="col">
-            <a href="/clientes/ver" class="btn btn-danger" >Agregar cliente</a>
-          </div>
-          <div class="col">
-            
-            <select id="metodoSearch" class="form-select"  aria-label="Default select example" role="group" >
-                <option selected>Metodo de Busqueda</option>
-                <option value="1" >Lineal Binario</option>
-                <option value="2" >Secuencial</option>
-            </select>
-          </div>
-          <select id="atributo" class="form-select"  aria-label="Default select example" role="group" >
-            <option selected>atributo</option>
-            <option value="_nombre" >Nombre</option>
-        </select>
-          <div class="col">
-            <search>
-                <form class="form-horizontal" role="form"  method="get">
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="search" name="search" placeholder="Buscar por nombre o apellido">
+            <div class="col">
+                <select id="metodo" class="form-select" aria-label="Default select example" role="group">
+                    <option selected>Metodo de ordenacion</option>
+                    <option value="1">QuickSort</option>
+                    <option value="2">MergeSort</option>
+                    <option value="3">ShellSort</option>
+                </select>
+            </div>
+           
+            <div class="col">
+                <select id="atributo" class="form-select " aria-label="Default select example" role="group">
+                    <option selected>atributo</option>
+                    <option value="_nombre">Nombre</option>
+                    <option value="_apellido">Apellido</option>
+                    <option value="_dni">DNI</option>
+                    <option value="_direccion">Direccion</option>
+                    <option value="_telefono">Telefono</option>
+                    <option value="_TiempoAtencion">Tiempo de atencion</option>
+                    <option value="_CalificarServicio">Calificacion de servicio</option>
+                </select>
+            </div>
+
+            <div class="col">
+                <search>
+                    <form class="form-horizontal" role="form" method="get">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="search" name="search"
+                                    placeholder="Buscar">
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </search>
-          </div>
+                    </form>
+                </search>
+            </div>
         </div>
-      </div>
-
-
+    </div>
     
-    
-    <!-- <button id="link" class="btn btn-danger" >ORDENAR</button> -->
 </div>
 
-    <br>
-    <br>
+<!-- <button id="link" class="btn btn-danger" >ORDENAR</button> -->
+
 <div class="p-4">
-    <table id="tabla" class="table table-dark table-hover" >
+    <table id="tabla" class="table table-dark table-hover">
         <thead>
             <tr>
-                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning" onclick="sortTable('_id')" >Nro </th>
-                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning" onclick="sortTable('_apellido')">Cliente</th>
-                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning" onclick="sortTable('_dni')">DNI</th>
-                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning" onclick="sortTable('_direccion')">Direccion</th>
-                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning" onclick="sortTable('_telefono')">Telefono</th>
-                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning" onclick="sortTable('_TiempoAtencion')">Tiempo de atencion HH:MM</th>
-                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning" onclick="sortTable('_CalificarServicio')">Calificacion de servicio</th>
-                <th class="text-bg-warning" >Acciones</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning"
+                    onclick="sortTable('_id')">Nro </th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning"
+                    onclick="sortTable('_apellido')">Cliente</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning"
+                    onclick="sortTable('_dni')">DNI</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning"
+                    onclick="sortTable('_direccion')">Direccion</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning"
+                    onclick="sortTable('_telefono')">Telefono</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning"
+                    onclick="sortTable('_TiempoAtencion')">Tiempo de atencion HH:MM</th>
+                <th title="Click para ordenar por el atributo" style="cursor: pointer" class="text-bg-warning"
+                    onclick="sortTable('_CalificarServicio')">Calificacion de servicio</th>
+                <th class="text-bg-warning">Acciones</th>
             </tr>
         </thead>
         <tbody>
             {% for item in lista %}
-                <tr>
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.apellido }} {{ item.nombre }}</td>
-                    <td>{{ item.dni }}</td>
-                    <td>{{ item.direccion }}</td>
-                    <td>{{ item.telefono }}</td>
-                    <td>{{ item.tiempoAtencion }}</td>
-                    <td>{{ item.calificarServicio }}</td>
-                    <td>
-                        <a href="/clientes/editar/{{ item.id }}" class="btn btn-warning">Editar</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.apellido }} {{ item.nombre }}</td>
+                <td>{{ item.dni }}</td>
+                <td>{{ item.direccion }}</td>
+                <td>{{ item.telefono }}</td>
+                <td>{{ item.tiempoAtencion }}</td>
+                <td>{{ item.calificarServicio }}</td>
+                <td>
+                    <a href="/clientes/editar/{{ item.id }}" class="btn btn-warning">Editar</a>
+                </td>
+            </tr>
             {% endfor%}
         </tbody>
     </table>
 </div>
-<script>
 
-</script>
 {% endblock %}

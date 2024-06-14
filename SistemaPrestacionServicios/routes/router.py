@@ -31,15 +31,15 @@ def lista_clientes_ordenar(tipo, attr, metodo):
         200
     )
 
-@router.route('/clientes/search/<string:elemento>/<int:metodo>')
-def lista_clientes_search(elemento, metodo):
+@router.route('/clientes/search/<string:elemento>/<string:attr>')
+def lista_clientes_search(elemento, attr):
     cd = ClienteDaoControl()
     list = cd._list()
-    list.search_binarySecuencial_models(elemento, "_nombre")
+    if attr == '_dni' or attr == '_telefono':
+        list.search_binary_models(elemento, attr)
+    list.search_binarySecuencial_models(elemento, attr)
     print(cd._transform_())
-    #return render_template('clientes/lista.html', lista = cd.to_dict_lista(list))
     return make_response(jsonify({"msg":"OK", "code": 200, "data":cd.to_dic_lista(list)}),)
-
 
 
 
@@ -50,6 +50,32 @@ def lista_clientes_search(elemento, metodo):
 def lista_registros():
     rd = RegistroDaoControl()
     return render_template('registros/lista.html', lista = rd.to_dict())
+
+@router.route('/registros/<int:tipo>/<attr>/<int:metodo>')
+def lista_registros_ordenar(tipo, attr, metodo):
+    cd = RegistroDaoControl()
+    list = cd._list()
+    list.sort_models(attr, tipo, metodo)
+    #return render_template('clientes/lista.html', lista = cd.to_dict_lista(list))
+    return make_response(
+        jsonify({"msg":"OK", "code": 200, "data": cd.to_dic_lista(list)}),
+        200
+    )
+
+@router.route('/registros/search/<string:elemento>/<string:attr>')
+def lista_registros_search(elemento, attr):
+    cd = RegistroDaoControl()
+    list = cd._list()
+    if attr == '_clienteDni':
+        list.search_binary_models(elemento, attr)
+    list.search_binarySecuencial_models(elemento, attr)
+    print(cd._transform_())
+    return make_response(jsonify({"msg":"OK", "code": 200, "data":cd.to_dic_lista(list)}),)
+
+
+
+
+
 
 
 @router.route('/clientes/ver')
