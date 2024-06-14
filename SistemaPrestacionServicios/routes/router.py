@@ -20,17 +20,25 @@ def lista_clientes():
     list.sort_models("_id",1)
     return render_template('clientes/lista.html', lista = cd.to_dic_lista(list))
 
-@router.route('/clientes/<tipo>/<attr>/<metodo>')
+@router.route('/clientes/<int:tipo>/<attr>/<int:metodo>')
 def lista_clientes_ordenar(tipo, attr, metodo):
     cd = ClienteDaoControl()
     list = cd._list()
-    list.sort_models(attr, int(tipo), int(metodo))
+    list.sort_models(attr, tipo, metodo)
     #return render_template('clientes/lista.html', lista = cd.to_dict_lista(list))
     return make_response(
         jsonify({"msg":"OK", "code": 200, "data": cd.to_dic_lista(list)}),
         200
     )
 
+@router.route('/clientes/search/<string:elemento>/<int:metodo>')
+def lista_clientes_search(elemento, metodo):
+    cd = ClienteDaoControl()
+    list = cd._list()
+    list.search_binarySecuencial_models(elemento, "_nombre")
+    print(cd._transform_())
+    #return render_template('clientes/lista.html', lista = cd.to_dict_lista(list))
+    return make_response(jsonify({"msg":"OK", "code": 200, "data":cd.to_dic_lista(list)}),)
 
 
 

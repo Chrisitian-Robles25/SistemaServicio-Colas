@@ -171,7 +171,6 @@ class LinkedList(object):
     def toList(self, array):
         self.clear
         for i in range (0, len(array)):
-            #self.__addLast__(array.get[i])
             self.__addLast__(array[i])
 
     #Ordenamiento de la lista-------------------------------------------------------------------------------------------------
@@ -293,19 +292,19 @@ class LinkedList(object):
         if self.isEmpty:
             raise LinkedEmpty("List empty")
         else:
-            init(autoreset=True)
+            
             array = self.toArray
             search = BinarySecuencial()
             index = search.search_BinarySecuencial_models(array, element, attribute)
+            aux = []
             if index == -1:
                 print(f"Models con {attribute} = {element} no encontrado")
             else:
-                print(f"{Fore.GREEN}los modelos con {attribute} = {element} fueron encontrados en: ") #{index}
+               # print(f"{Fore.GREEN}los modelos con {attribute} = {element} fueron encontrados en: ") #{index}
                 #imprimir los objetos de index
                 for i in range(0, len(index)):
-                    print(index[i])
-        self.toList(array)
-        return self
+                    aux.append(index[i])
+        self.toList(aux)
         
     #-------------------------- Secuencial------------------------------------------------------------------------------------------------
     
