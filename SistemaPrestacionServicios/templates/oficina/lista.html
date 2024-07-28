@@ -1,0 +1,107 @@
+{% extends "templateL.html" %}
+{% block content %}
+<script>
+    $(document).ready(function() {
+            
+            $('#link').click(function() {
+                create();
+                
+            });
+        });
+
+        let currentSortOrder = 1; // 1 for ascending, 2 for descending
+
+        function sortTable(attribute) {
+            const sortOrder = currentSortOrder;
+            currentSortOrder = (currentSortOrder === 1) ? 2 : 1;
+
+            const metodo = $('#metodo').find(":selected").val();
+            tabla("http://localhost:5000/negocios/"+sortOrder+"/"+attribute+"/"+metodo);
+        }
+
+        function tabla(url) {
+            $.ajax({
+                method: "GET",
+                url: url,
+                contentType: "json",
+                success: function(data){
+                    //console.log(data);
+                    if(data.code == '200'){
+                        var html = '';
+                            $.each(data.data, function(i, info){
+                                console.log(info);
+                                html += '<tr>';
+                                html += '<td>' + i + '</td>';
+                                html += '<td>' + info.nombre + '</td>';
+                                html += '<td>' + info.direccion + '</td>' ;
+                                html += '<td>' + info.horario + '</td>';
+                                html += '<td>' + info.lng + info.lat + '</td>';
+                                html += '<td>'+ '<a href="/negocios/editar/'+info.id +'" class="btn btn-warning">Editar</a>'+ '</td>';
+                                html += '</tr>';
+                            });
+                        
+                        $('#tabla tbody').html(html);
+                    }
+                }
+            });
+        }
+
+        function create(){
+            var aux = $('#tipo').prop('checked');
+            var select = $('#criterio').find(":selected").val();
+            var select2 = $('#metodo').find(":selected").val();
+            if (aux) {
+                tabla("http://localhost:5000/negocios/1/"+select+"/"+select2);
+                
+            } else {
+                tabla("http://localhost:5000/negocios/2/"+select+"/"+select2);
+            }
+        }
+        /* function create() {
+            var aux = $('#tipo').prop('checked') ? 2 : 1;
+            var select = $('#criterio').find(":selected").val();
+            var select2 = $('#metodo').find(":selected").val() === 'QuickSort' ? 1 : ($('#metodo').find(":selected").val() === 'MergeSort' ? 2 : 3);
+            tabla("http://localhost:5000/clientes/" + aux + "/" + select + "/" + select2);
+        } */
+
+
+</script>
+
+<h2 class="text-white">Lista de oficinas</h2>
+<div class="booking-form-body">
+    <a href="/oficinas/ver" class="btn btn-danger">AGREGAR</a>
+    <a href="/grafo_oficina/0/0/1" target="_blank" class="btn btn-danger">Ver Grafo</a>
+    <a href="/grafo_ver_admin"  class="btn btn-warning">Administrar grafo</a>
+
+
+    <table id="tabla" class="table text-white">
+        <thead>
+            <th >Nro</th>
+            <th >Nombre</th>
+            <th >direccion</th>
+            <th >horario</th>
+            <th >Coordenadas</th>
+            <th>Actions</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for item in lista %}
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.direccion}}</td>
+                <td>{{item.horario}}</td>
+                <td>{{ '%.3f' | format(item.lng | float) }} {{ '%.3f' | format(item.lat | float) }}</td>
+                <td><a href="/oficinas/editar/{{item.id}}" class="btn btn-info">Modificar</a></td>
+                <td>
+                    <form action="/oficinas/eliminar" method="post">
+                        <input type="hidden" name="id" value="{{item.id}}">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form> 
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

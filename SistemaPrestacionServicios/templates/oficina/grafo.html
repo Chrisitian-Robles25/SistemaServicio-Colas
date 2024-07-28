@@ -1,0 +1,102 @@
+{% extends "templateL.html" %}
+{% block content %}
+<script>
+    $(document).ready(function() {
+            
+            $('#link').click(function() {
+              //  create();
+                
+            });
+        });
+
+</script>
+<style>
+    table, th, td {
+        border: 1px solid white; /* Aplicar borde blanco a todas las celdas */
+        border-collapse: collapse; /* Colapsar los bordes para que no haya duplicados */
+    }
+    th, td {
+        padding: 8px; /* Añadir un poco de padding para mejorar la visualización */
+        text-align: left; /* Alinear el texto a la izquierda */
+    }
+    .table {
+        width: 100%; /* Ajustar la tabla al ancho completo */
+    }
+</style>
+
+<h2 class="text-white">Lista de oficinas</h2>
+<div class="booking-form-body table-responsive">
+    
+    <form class="row form-control" role="form" method="post" action="/oficinas/agregar-adjancencia">
+        <div class="card">
+            <div class="card-header" style="margin: 20px;">
+                <h5 class="text-white>">Agregar adyancencias</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <spam> Origen </spam>
+                        <select id="origen" name="origen" class="form-control">
+                            <option value="0">  </option>
+                            {% for item in lista %}
+                            <option value="{{item.id}}">{{item.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <spam> Destino </spam>
+                        <select id="destino" name="destino" class="form-control">
+                            <option value="0">  </option>
+                            {% for item in lista %}
+                            <option value="{{item.id}}">{{item.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-12" style="margin-top: 20px;">
+                        <button id="link" class="btn btn-success">Agregar</button>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <a href="/oficinas" class="btn btn-danger" style="margin-top: 20px;">volver</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <table id="tabla" class="table text-white " style="margin-top: 20px;">
+        <thead>
+            <tr>
+                <th>-----</th>
+                {% for item in lista %}
+                <th>{{ item.nombre }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in lista %}
+                <tr>
+                    <td>{{ item.nombre }}</td>
+                    {% for grafo in grafonegocioaux %}
+                        {% if grafo.labelId == item.id %}
+                            {%for negocio in lista %}
+                                <td>
+                                    {% for destino in grafo.destinations %}
+                                        {% if destino.to == negocio.id %}
+                                            {{destino.weigth}}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if item.id == negocio.id %}
+                                        ---
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    
+</div>
+{% endblock %}

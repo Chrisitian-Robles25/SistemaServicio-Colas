@@ -1,0 +1,45 @@
+{%extends "templateL.html"%}
+{%block content%}
+<h2 class="text-white">Agregar Oficinas</h2>
+<div class="booking-form-body">
+    <a href="/oficinas" class="btn btn-success">VOLVER</a>       
+    <form id="form" class="custom-form booking-form"  action="/oficinas/modificar" method="post" role="form">
+        <div class="booking-form-body">
+            <input type="hidden" name="id" value="{{data._id}}"/>
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    <input type="text" name="nombre" value="{{data._nombre}}" class="form-control" placeholder="Nombre" required>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <input type="text" name="direccion" value="{{data._direccion}}" class="form-control" placeholder="Direccion" required>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <input type="text" name="horario" value="{{data._horario}}" class="form-control" placeholder="Horario" required>
+                </div>
+                
+                <div id="map" class="m-3" style="height: 400px;"></div>
+                
+                <div class="col-lg-6 col-12">
+                    <input type="text" name="lng" value="{{data._lng}}" class="form-control" placeholder="Longitud" required>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <input type="text" name="lat" value="{{data._lat}}" class="form-control" placeholder="Latitud" required>
+                </div>
+
+                <div class="col-lg-4 col-md-10 col-8 mx-auto mt-2">
+                    <button id="boton" type="submit" class="form-control btn btn-success">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </form> 
+    <script>
+
+        function onMapClick(e) {
+            alert("Hiciste clic en el mapa en " + e.latlng);
+            document.getElementsByName("lng")[0].value = e.latlng.lng; // Actualiza el valor de longitud
+            document.getElementsByName("lat")[0].value = e.latlng.lat; // Actualiza el valor de latitud
+        }
+    
+        map.on('click', onMapClick); // Vincula la función onMapClick al evento de clic en el mapa
+    </script>
+{% endblock %}

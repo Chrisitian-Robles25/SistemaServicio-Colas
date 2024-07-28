@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+
+  <script src="/static/d3/vis.js"></script>
+  <style type="text/css">
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --color-primary: #6C9BCF;
+      --color-danger: #FF0060;
+      --color-success: #1B9C85;
+      --color-warning: #F7D060;
+      --color-white: #fff;
+      --color-info-dark: #7d8da1;
+      --color-dark: #363949;
+      --color-light: rgba(132, 139, 200, 0.18);
+      --color-dark-variant: #677483;
+      --color-background: #f6f6f9;
+
+      --card-border-radius: 2rem;
+      --border-radius-1: 0.4rem;
+      --border-radius-2: 1.2rem;
+
+      --card-padding: 1.8rem;
+      --padding-1: 1.2rem;
+
+      --box-shadow: 0 2rem 3rem var(--color-light);
+    }
+
+    .dark-mode-variables {
+      --color-background: #181a1e;
+      --color-white: #202528;
+      --color-dark: #edeffd;
+      --color-dark-variant: #a3bdcc;
+      --color-light: rgba(0, 0, 0, 0.4);
+      --box-shadow: 0 2rem 3rem var(--color-light);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      outline: 0;
+      appearance: 0;
+      border: 0;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 14px;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.88rem;
+      user-select: none;
+      overflow-x: hidden;
+      color: var(--color-dark);
+      background-color: var(--color-background);
+    }
+
+    a {
+      color: var(--color-dark);
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    h1 {
+      font-weight: 800;
+      font-size: 1.8rem;
+    }
+
+    h2 {
+      font-weight: 600;
+      font-size: 1.4rem;
+    }
+
+    h3 {
+      font-weight: 500;
+      font-size: 0.87rem;
+    }
+
+    small {
+      font-size: 0.76rem;
+    }
+
+    p {
+      color: var(--color-dark-variant);
+    }
+
+    b {
+      color: var(--color-dark);
+    }
+
+    .text-muted {
+      color: var(--color-info-dark);
+    }
+
+    .primary {
+      color: var(--color-primary);
+    }
+
+    .danger {
+      color: var(--color-danger);
+    }
+
+    .success {
+      color: var(--color-success);
+    }
+
+    .warning {
+      color: var(--color-warning);
+    }
+
+    .container {
+      display: grid;
+      width: 96%;
+      margin: 0 auto;
+      gap: 1.8rem;
+      grid-template-columns: 12rem auto 23rem;
+    }
+
+    aside {
+      height: 100vh;
+    }
+
+    aside .toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.4rem;
+    }
+
+    aside .toggle .logo {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    aside .toggle .logo img {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    aside .toggle .close {
+      padding-right: 1rem;
+      display: none;
+    }
+
+    aside .sidebar {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--color-white);
+      box-shadow: var(--box-shadow);
+      border-radius: 15px;
+      height: 88vh;
+      position: relative;
+      top: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    aside .sidebar:hover {
+      box-shadow: none;
+    }
+
+    aside .sidebar a {
+      display: flex;
+      align-items: center;
+      color: var(--color-info-dark);
+      height: 3.7rem;
+      gap: 1rem;
+      position: relative;
+      margin-left: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    aside .sidebar a span {
+      font-size: 1.6rem;
+      transition: all 0.3s ease;
+    }
+
+    aside .sidebar a:last-child {
+      position: absolute;
+      bottom: 2rem;
+      width: 100%;
+    }
+
+    aside .sidebar a.active {
+      width: 100%;
+      color: var(--color-primary);
+      background-color: var(--color-light);
+      margin-left: 0;
+    }
+
+    aside .sidebar a.active::before {
+      content: '';
+      width: 6px;
+      height: 18px;
+      background-color: var(--color-primary);
+    }
+
+    aside .sidebar a.active span {
+      color: var(--color-primary);
+      margin-left: calc(1rem - 3px);
+    }
+
+    aside .sidebar a:hover {
+      color: var(--color-primary);
+    }
+
+    aside .sidebar a:hover span {
+      margin-left: 0.6rem;
+    }
+
+    aside .sidebar .message-count {
+      background-color: var(--color-danger);
+      padding: 2px 6px;
+      color: var(--color-white);
+      font-size: 11px;
+      border-radius: var(--border-radius-1);
+    }
+
+    main {
+      margin-top: 1.4rem;
+    }
+
+    main .analyse {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.6rem;
+    }
+
+    main .analyse>div {
+      background-color: var(--color-white);
+      padding: var(--card-padding);
+      border-radius: var(--card-border-radius);
+      margin-top: 1rem;
+      box-shadow: var(--box-shadow);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    main .analyse>div:hover {
+      box-shadow: none;
+    }
+
+    main .analyse>div .status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    main .analyse h3 {
+      margin-left: 0.6rem;
+      font-size: 1rem;
+    }
+
+    main .analyse .progresss {
+      position: relative;
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+    }
+
+    main .analyse svg {
+      width: 7rem;
+      height: 7rem;
+    }
+
+    main .analyse svg circle {
+      fill: none;
+      stroke-width: 10;
+      stroke-linecap: round;
+      transform: translate(5px, 5px);
+    }
+
+    main .analyse .sales svg circle {
+      stroke: var(--color-success);
+      stroke-dashoffset: -30;
+      stroke-dasharray: 200;
+    }
+
+    main .analyse .visits svg circle {
+      stroke: var(--color-danger);
+      stroke-dashoffset: -30;
+      stroke-dasharray: 200;
+    }
+
+    main .analyse .searches svg circle {
+      stroke: var(--color-primary);
+      stroke-dashoffset: -30;
+      stroke-dasharray: 200;
+    }
+
+    main .analyse .progresss .percentage {
+      position: absolute;
+      top: -3px;
+      left: -1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+    }
+
+    main .new-users {
+      margin-top: 1.3rem;
+    }
+
+    main .new-users .user-list {
+      background-color: var(--color-white);
+      padding: var(--card-padding);
+      border-radius: var(--card-border-radius);
+      margin-top: 1rem;
+      box-shadow: var(--box-shadow);
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 1.4rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    main .new-users .user-list:hover {
+      box-shadow: none;
+    }
+
+    main .new-users .user-list .user {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    main .new-users .user-list .user img {
+      width: 5rem;
+      height: 5rem;
+      margin-bottom: 0.4rem;
+      border-radius: 50%;
+    }
+
+    main .recent-orders {
+      margin-top: 1.3rem;
+    }
+
+    main .recent-orders h2 {
+      margin-bottom: 0.8rem;
+    }
+
+    main .recent-orders table {
+      background-color: var(--color-white);
+      width: 100%;
+      padding: var(--card-padding);
+      text-align: center;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--card-border-radius);
+      transition: all 0.3s ease;
+    }
+
+    main .recent-orders table:hover {
+      box-shadow: none;
+    }
+
+    main table tbody td {
+      height: 2.8rem;
+      border-bottom: 1px solid var(--color-light);
+      color: var(--color-dark-variant);
+    }
+
+    main table tbody tr:last-child td {
+      border: none;
+    }
+
+    main .recent-orders a {
+      text-align: center;
+      display: block;
+      margin: 1rem auto;
+      color: var(--color-primary);
+    }
+
+
+
+    #mynetwork {
+      width: 600px;
+      height: 400px;
+      border: 1px solid lightgray;
+    }
+
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .form-container h2 {
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .form-group select,
+    .form-group input {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      color: white;
+      background-color: #007bff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .form-group button:hover {
+      background-color: #0056b3;
+    }
+
+
+
+
+
+
+
+
+
+    .custom-btn {
+      background-color: #f0a40093;
+      border: 2px solid #f0a500;
+      /* Borde del botón */
+      color: black;
+      /* Color del texto del botón */
+      padding: 5px 15px;
+      /* Espacio interno del botón */
+      border-radius: 25px;
+      /* Bordes redondeados */
+      text-transform: uppercase;
+      /* Texto en mayúsculas */
+      font-weight: bold;
+      /* Grosor del texto del botón */
+    }
+
+    .custom-btn:hover {
+      background-color: #f0a500;
+      /* Fondo al pasar el mouse */
+      color: black;
+      /* Color del texto al pasar el mouse */
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .form-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      gap: 1rem;
+      /* Aumentar el gap para más espacio */
+    }
+
+    .form-row .form-group {
+      flex: 1;
+      margin: 0 0.5rem;
+      /* Añadir margen a los lados de cada grupo */
+    }
+
+    .form-row .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .form-row .form-group select,
+    .form-row .form-group input {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form-row .form-group select {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .form-row .form-group button {
+      width: calc(100% - 1rem);
+      /* Ajuste para el botón */
+      padding: 0.75rem;
+      font-size: 1rem;
+      color: white;
+      background-color: #007bff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 1rem;
+      /* Añadir margen superior para separar el botón de los selectores */
+    }
+
+    .form-row .form-group button:hover {
+      background-color: #0056b3;
+    }
+
+    .hidden-option {
+      display: none;
+    }
+  </style>
+</head>
+
+
+
+<body>
+
+
+
+  <div class="container">
+    <!-- Sidebar Section -->
+    <aside>
+      <div class="toggle">
+        <div class="logo">
+
+          <h2>Oficinas<span class="danger">Grafo</span></h2>
+        </div>
+      </div>
+      <div class="info">
+        <p>Estudiante, <b>C. Robles</b></p>
+        <small class="text-muted">Universidad Nacional de Loja</small>
+      </div>
+      <div style="margin-top: 1em;">
+        <a class="btn custom-btn custom-border-btn" style="margin-top: 1em;" href="/oficinas">
+          ver Oficinas
+          <i class="bi-arrow-up-right ms-2"></i>
+        </a>
+      </div>
+
+    </aside>
+    <!-- End of Sidebar Section -->
+
+    <!-- Main Content -->
+    <main>
+
+      <!-- End of Analyses -->
+
+      <!-- New Users Section -->
+      <div class="new-users">
+
+
+        <div class="user-list">
+          <div id="mynetwork">
+            <script type="text/javascript" src="/static/d3/grafo.js">
+              // create an array with nodes
+
+            </script>
+          </div>
+        </div>
+      </div>
+      <!-- End of New Users Section -->
+
+
+
+
+
+
+      <!-- Form Section -->
+      <div class="new-users">
+        <div class="user-list">
+          <div class="form-container">
+            <h2>Busqueda de Grafo</h2>
+            <form role="form" method="get" id="busquedaForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="origen">Origen:</label>
+                  <select id="origen" name="origen">
+                    <option value="0"> </option>
+                    {% for item in lista %}
+                    <option value="{{ item.id }}">{{ item.nombre }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="destino">Destino:</label>
+                  <select id="destino" name="destino">
+                    <option value="0"> </option>
+                    {% for item in lista %}
+                    <option value="{{ item.id }}">{{ item.nombre }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="algoritmo">Algoritmo de Búsqueda:</label>
+                  <select id="algoritmo" name="algoritmo">
+                    <option value="1">Algoritmo de Dijkstra</option>
+                    <option value="2">Algoritmo de Floyd</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top: 1em;">
+                <button id="buscarCamino" class="btn btn-success" type="submit">Buscar Camino</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      <!-- Recent Orders Table -->
+      <div class="new-users">
+        <div class="user-list">
+            <div class="form-container">
+                <h2>Resultados</h2>
+                <label for="destino" style="font-size: medium;">Recorrido a seguir:</label>
+                <p style="color: #1B9C85; font-style: normal; font-size: medium;">
+                    {% for punto in caminoCorto %}
+                        {{ punto }}{% if not loop.last %} --> {% endif %}
+                    {% endfor %}
+                </p>
+                <label for="destino" style="font-size: medium;">Total del recorrido:</label>
+                <p style="color: #1B9C85; font-style: normal; font-size: medium;">{{ '%.3f' | format(Distancia) }} Kilometros</p>
+            </div>
+        </div>
+    </div>
+      <!-- End of Recent Orders -->
+
+    </main>
+
+  </div>
+
+  </div>
+
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const origenSelect = document.getElementById('origen');
+      const destinoSelect = document.getElementById('destino');
+
+      function updateOptions() {
+        const origenValue = origenSelect.value;
+        const destinoValue = destinoSelect.value;
+
+        // Mostrar todas las opciones
+        const origenOptions = origenSelect.options;
+        const destinoOptions = destinoSelect.options;
+
+        for (let i = 0; i < origenOptions.length; i++) {
+          origenOptions[i].classList.remove('hidden-option');
+          destinoOptions[i].classList.remove('hidden-option');
+        }
+
+        // Ocultar opciones seleccionadas
+        if (origenValue !== "0") {
+          const destinoOption = destinoSelect.querySelector(`option[value="${origenValue}"]`);
+          if (destinoOption) destinoOption.classList.add('hidden-option');
+        }
+
+        if (destinoValue !== "0") {
+          const origenOption = origenSelect.querySelector(`option[value="${destinoValue}"]`);
+          if (origenOption) origenOption.classList.add('hidden-option');
+        }
+      }
+
+      origenSelect.addEventListener('change', updateOptions);
+      destinoSelect.addEventListener('change', updateOptions);
+    });
+  </script>
+  <script>
+    document.getElementById('busquedaForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const origen = document.getElementById('origen').value;
+      const destino = document.getElementById('destino').value;
+      const algoritmo = document.getElementById('algoritmo').value;
+  
+      const url = `/grafo_oficina/${origen}/${destino}/${algoritmo}`;
+      window.location.href = url;
+    });
+  </script>
+</body>
+
+</html>

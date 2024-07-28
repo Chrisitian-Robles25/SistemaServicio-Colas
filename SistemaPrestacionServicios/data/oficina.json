@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "nombre": "bella vista",
+        "direccion": "la argelia",
+        "horario": "8pm - 5pm",
+        "lng": -79.207820892334,
+        "lat": -4.02249415655421
+    },
+    {
+        "id": 2,
+        "nombre": "El triunfo",
+        "direccion": "Loja",
+        "horario": "8pm - 5pm",
+        "lng": -79.20455932617189,
+        "lat": -4.01598706742771
+    },
+    {
+        "id": 3,
+        "nombre": "La paz",
+        "direccion": "8pm - 5pm",
+        "horario": "14:00",
+        "lng": -79.20318603515626,
+        "lat": -4.022665395040331
+    },
+    {
+        "id": 4,
+        "nombre": "El condominio",
+        "direccion": "Pindal",
+        "horario": "8pm - 5pm",
+        "lng": -79.20181274414064,
+        "lat": -4.021809202249838
+    },
+    {
+        "id": 5,
+        "nombre": "Cinco esquinas",
+        "direccion": "Loja",
+        "horario": "8pm - 5pm",
+        "lng": -79.21142578125001,
+        "lat": -4.033967055477006
+    },
+    {
+        "id": 6,
+        "nombre": "CasaMIA",
+        "direccion": "Alamor",
+        "horario": "9am - 5pm",
+        "lng": -80.02449989318849,
+        "lat": -4.019411857651369
+    }
+]
