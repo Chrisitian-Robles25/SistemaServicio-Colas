@@ -46,5 +46,77 @@
         "horario": "9am - 5pm",
         "lng": -80.02449989318849,
         "lat": -4.019411857651369
+    },
+    {
+        "id": 7,
+        "nombre": "La esperanza",
+        "direccion": "Loja",
+        "horario": "8am - 5pm",
+        "lng": -79.20644760131837,
+        "lat": -4.037819858351347
+    },
+    {
+        "id": 8,
+        "nombre": "Barrio nuevo",
+        "direccion": "Loja",
+        "horario": "8am - 5pm",
+        "lng": -79.22550201416017,
+        "lat": -4.020610530831917
+    },
+    {
+        "id": 9,
+        "nombre": "La esquinera",
+        "direccion": "Loja",
+        "horario": "8am - 5pm",
+        "lng": -79.20970916748048,
+        "lat": -3.988245737983887
+    },
+    {
+        "id": 10,
+        "nombre": "Puyango",
+        "direccion": "Loja",
+        "horario": "8am - 5pm",
+        "lng": -79.19374465942384,
+        "lat": -3.9986916574931772
+    },
+    {
+        "id": 11,
+        "nombre": "El limo",
+        "direccion": "Loja",
+        "horario": "8am - 5pm",
+        "lng": -79.23408508300783,
+        "lat": -4.000917819863596
+    },
+    {
+        "id": 12,
+        "nombre": "El arenal",
+        "direccion": "Loja",
+        "horario": "8am - 5pm",
+        "lng": -79.16627883911134,
+        "lat": -4.010336132142796
+    },
+    {
+        "id": 13,
+        "nombre": "Ciano",
+        "direccion": "Loja",
+        "horario": "8am - 5pm",
+        "lng": -79.16696548461915,
+        "lat": -3.984478324579362
+    },
+    {
+        "id": 14,
+        "nombre": "Pindal",
+        "direccion": "Loja",
+        "horario": "8am - 5pm",
+        "lng": -79.36386108398439,
+        "lat": -3.99441055902031
+    },
+    {
+        "id": 15,
+        "nombre": "Naipiraca",
+        "direccion": "Loja",
+        "horario": "8am - 5pm",
+        "lng": -79.64263916015626,
+        "lat": -4.045097324980075
     }
 ]

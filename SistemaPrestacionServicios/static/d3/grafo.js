@@ -1,24 +1,21 @@
 var nodes = new vis.DataSet([
-{id: 1, label: "1 bella vista"},
-{id: 2, label: "2 El triunfo"},
-{id: 3, label: "3 La paz"},
-{id: 4, label: "4 El condominio"},
-{id: 5, label: "5 Cinco esquinas"},
-{id: 6, label: "6 CasaMIA"}]);
+{id: 1, label: "bella vista"},
+{id: 2, label: "El triunfo"},
+{id: 3, label: "La paz"},
+{id: 4, label: "El condominio"},
+{id: 5, label: "Cinco esquinas"},
+{id: 6, label: "CasaMIA"},
+{id: 7, label: "La esperanza"},
+{id: 8, label: "Barrio nuevo"},
+{id: 9, label: "La esquinera"},
+{id: 10, label: "Puyango"},
+{id: 11, label: "El limo"},
+{id: 12, label: "El arenal"},
+{id: 13, label: "Ciano"},
+{id: 14, label: "Pindal"},
+{id: 15, label: "Naipiraca"}]);
 
- var edges = new vis.DataSet([{
-from: 1, to: 2, label: "0.81"},{
-from: 1, to: 3, label: "0.52"},{
-from: 1, to: 4, label: "0.67"},{
-from: 2, to: 1, label: "0.81"},{
-from: 2, to: 3, label: "0.75"},{
-from: 2, to: 5, label: "2.13"},{
-from: 3, to: 1, label: "0.52"},{
-from: 3, to: 2, label: "0.75"},{
-from: 3, to: 6, label: "91.21"},{
-from: 4, to: 1, label: "0.67"},{
-from: 5, to: 2, label: "2.13"},{
-from: 6, to: 3, label: "91.21"},]);
+ var edges = new vis.DataSet([]);
 var container = document.getElementById("mynetwork"); 
  var data = { nodes: nodes, edges: edges, }; 
  var options = {}; 

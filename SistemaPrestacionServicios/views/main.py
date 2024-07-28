@@ -13,9 +13,22 @@ sys.setrecursionlimit(3000)  # El valor predeterminado suele ser 1000
 from controls.tda.graph.metodoBusqueda.dijkstra import Dijkstra
 from controls.oficina.oficinaGrafo import OficinaGrafo
 
+
 oficina = OficinaGrafo()
-busqueda = Dijkstra(oficina.obtenerGrafo, 6, 4)
+
+""" Inicio = time()
+print("---------BUSCANDO CON DJIKSTRA---------")
+oficina.obtenerGrafo 
+print(oficina.caminoCorto(13, 12,1))
+Findijkstra = time() - Inicio """
+print("---------BUSCANDO CON FLOYD---------")
+Inicio = time()
+oficina.obtenerGrafo 
+print(oficina.caminoCorto(13, 12,2))
+Finfloyd = time() - Inicio
 
 
-oficina.obtenerGrafo  
-print(oficina.caminoCorto(6, 4))
+print(f"Tiempo de ejecución de Floyd: {Finfloyd}")
+
+#print(f"Tiempo de ejecución de Dijkstra: {Findijkstra}")
+
